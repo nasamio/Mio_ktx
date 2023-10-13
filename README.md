@@ -21,7 +21,7 @@ allprojects {
 
 ```
 dependencies {
-            
+    implementation 'com.github.nasamio:Mio_ktx:Tag'
 }
 ```
 
