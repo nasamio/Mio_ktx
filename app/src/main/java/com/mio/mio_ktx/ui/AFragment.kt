@@ -7,6 +7,8 @@ import com.mio.base.Tag.TAG
 import com.mio.base.replaceFragment
 import com.mio.mio_ktx.R
 import com.mio.mio_ktx.databinding.FragmentABinding
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class AFragment : BaseFragment<FragmentABinding>(R.layout.fragment_a) {
     override fun initView() {
