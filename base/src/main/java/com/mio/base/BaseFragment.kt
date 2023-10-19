@@ -1,5 +1,6 @@
 package com.mio.base
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import androidx.fragment.app.Fragment
 abstract class BaseFragment<T : ViewDataBinding>(private val layoutId: Int) : Fragment() {
     protected lateinit var mDataBinding: T
     var showInitTag: Boolean = false
+    val mContext: Context by lazy { requireContext() }
 
     override fun onCreateView(
         inflater: LayoutInflater,

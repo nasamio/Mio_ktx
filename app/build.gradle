@@ -1,7 +1,6 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-//    id 'maven-publish'
 }
 
 android {
@@ -48,28 +47,5 @@ dependencies {
 //    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
     implementation project(':base')
-//    implementation 'com.github.nasamio:Mio_ktx:0.0.1'
-
-    String Tag = '0.0.1'
-//    implementation 'com.github.nasamio:Mio_ktx:$Tag'
 }
 
-String GROUP_ID = "com.github.nasamio"
-String ARTIFACT_ID = "Mio_ktx"
-String VERSION = "0.0.1"
-
-//afterEvaluate {
-//    publishing { // 发布配置
-//        publications { // 发布的内容
-//
-//            release(MavenPublication) {
-//                from components.release
-//
-//                groupId = GROUP_ID
-//                artifactId = ARTIFACT_ID
-//                version = VERSION
-//            }
-//        }
-//    }
-//
-//}
