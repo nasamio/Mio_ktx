@@ -14,6 +14,7 @@ abstract class BaseFragment<T : ViewDataBinding>(private val layoutId: Int) : Fr
     lateinit var mDataBinding: T
     var showInitTag: Boolean = false
     val mContext: Context by lazy { requireContext() }
+    lateinit var last: BaseFragment<*> //存储上一个fragment 用以返回键使用
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,4 +45,11 @@ abstract class BaseFragment<T : ViewDataBinding>(private val layoutId: Int) : Fr
      * 初始化数据获取
      */
     abstract fun initData()
+
+    /**
+     * 处理按键事件
+     */
+    fun handleKey(keyCode: Int): Boolean {
+        return false
+    }
 }
