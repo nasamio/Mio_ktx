@@ -14,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction.TRANSIT_NONE
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager.widget.ViewPager
+import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -248,3 +250,22 @@ fun Context.getScreenWidth() = resources.displayMetrics.widthPixels
  */
 @SuppressLint("SimpleDateFormat")
 fun Long.getDateHHmm() = SimpleDateFormat("HH:mm").format(Date(this))!!
+
+fun ViewPager.addOnPageSelectListener(listener: (Int) -> Unit) {
+    addOnPageChangeListener(object : OnPageChangeListener {
+        override fun onPageScrolled(
+            position: Int,
+            positionOffset: Float,
+            positionOffsetPixels: Int
+        ) {
+        }
+
+        override fun onPageSelected(position: Int) {
+            listener(position)
+        }
+
+        override fun onPageScrollStateChanged(state: Int) {
+        }
+
+    })
+}

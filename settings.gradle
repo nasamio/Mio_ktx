@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 rootProject.name = "Mio_ktx"
 include ':app'  // 测试其他模块的应用模块
 include ':base' // 用于基类的模块
+include ':music'
