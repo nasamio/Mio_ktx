@@ -94,12 +94,12 @@
             android:background="@drawable/bg_progress"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <View
+        <com.google.android.material.progressindicator.LinearProgressIndicator
             android:id="@+id/v_progress"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:visibility="invisible"
-            android:background="@drawable/progress"
+            app:indicatorColor="@color/red"
+            android:background="@color/black_30"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

@@ -92,10 +92,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     private fun setProgress(p: Float) {
-        val lp = miniBinding.vProgress.layoutParams
-        lp.width = (miniBinding.vProgressBg.width * p / 100f).toInt()
-        miniBinding.vProgress.layoutParams = lp
-        miniBinding.vProgress.visibility = if (p != 0f) View.VISIBLE else View.INVISIBLE
+        miniBinding.vProgress.progress = p.toInt()
     }
 
     override fun initObserver() {
