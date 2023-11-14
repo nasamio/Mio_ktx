@@ -2,6 +2,7 @@ package com.mio.mio_ktx.ui
 
 import android.util.Log
 import androidx.fragment.app.FragmentTransaction.TRANSIT_FRAGMENT_OPEN
+import androidx.lifecycle.lifecycleScope
 import com.mio.base.BaseFragment
 import com.mio.base.Tag.TAG
 import com.mio.base.dp
@@ -10,9 +11,18 @@ import com.mio.base.px
 import com.mio.base.replaceFragment
 import com.mio.mio_ktx.R
 import com.mio.mio_ktx.databinding.FragmentABinding
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class AFragment : BaseFragment<FragmentABinding>(R.layout.fragment_a) {
     override fun initView() {
+        lifecycleScope.launch {
+            showLoading()
+            delay(1_200)
+            showContent()
+        }
+
+
         mDataBinding.btn.setOnClickListener {
             val activity = activity as MainActivity
             activity.replaceFragment(
@@ -35,6 +45,10 @@ class AFragment : BaseFragment<FragmentABinding>(R.layout.fragment_a) {
         val text = "abc"
         Log.d(TAG, "initView: text: $text , md5: ${text.md5()}")
 
+    }
+
+    override fun getLoadingLayoutId(): Int {
+        return R.layout.layout_loading2
     }
 
     override fun onDestroy() {

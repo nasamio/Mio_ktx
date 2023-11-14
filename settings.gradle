@@ -9,6 +9,7 @@ pluginManagement {
         maven{url 'https://maven.aliyun.com/repository/google'} //google
         maven{url 'https://maven.aliyun.com/repository/public'} //public
         maven{url 'https://maven.aliyun.com/repository/jcenter'} //jcenter
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
     }
 }
 dependencyResolutionManagement {
@@ -22,6 +23,7 @@ dependencyResolutionManagement {
         maven{url 'https://maven.aliyun.com/repository/google'} //google
         maven{url 'https://maven.aliyun.com/repository/public'} //public
         maven{url 'https://maven.aliyun.com/repository/jcenter'} //jcenter
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
     }
 }
 
@@ -33,3 +35,5 @@ rootProject.name = "Mio_ktx"
 include ':app'  // 测试其他模块的应用模块
 include ':base' // 用于基类的模块
 include ':music'
+//include ':weather'
+include ':script'

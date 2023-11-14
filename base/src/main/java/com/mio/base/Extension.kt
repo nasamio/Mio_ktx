@@ -9,6 +9,9 @@ import android.content.res.Resources
 import android.graphics.Rect
 import android.view.Gravity
 import android.view.View
+import android.view.ViewGroup
+import android.view.animation.AnimationUtils
+import android.view.animation.LayoutAnimationController
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -268,4 +271,13 @@ fun ViewPager.addOnPageSelectListener(listener: (Int) -> Unit) {
         }
 
     })
+}
+
+/**
+ * 设置vp的内部元素的出现样式
+ */
+fun ViewGroup.layoutAnimationFrom(animId: Int, duration: Long = 400) {
+    val animation = AnimationUtils.loadAnimation(context, animId)
+    animation.duration = duration
+    layoutAnimation = LayoutAnimationController(animation)
 }

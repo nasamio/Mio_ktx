@@ -92,7 +92,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     private fun setProgress(p: Float) {
-        miniBinding.vProgress.progress = p.toInt()
+        miniBinding.vProgress.progress = (p * 100f).toInt()
     }
 
     override fun initObserver() {
