@@ -43,7 +43,7 @@ class AFragment : BaseFragment<FragmentABinding>(R.layout.fragment_a) {
 
         // 测试 md5
         val text = "abc"
-        Log.d(TAG, "initView: text: $text , md5: ${text.md5()}")
+        // Log.d(TAG, "initView: text: $text , md5: ${text.md5()}")
 
     }
 

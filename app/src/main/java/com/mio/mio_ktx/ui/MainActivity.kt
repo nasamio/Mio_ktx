@@ -7,6 +7,7 @@ import com.mio.base.BaseActivity
 import com.mio.base.BaseFragment
 import com.mio.base.Tag.TAG
 import com.mio.base.replaceFragment
+import com.mio.base.view.BottomTab
 import com.mio.mio_ktx.R
 import com.mio.mio_ktx.databinding.ActivityMainBinding
 import kotlinx.coroutines.delay
@@ -31,6 +32,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             replaceFragment(R.id.container, AFragment())
 //            showContent()
         }
+        mDataBinding.bt.setCheckedChangeListener(object : BottomTab.OnCheckChangeListener {
+            override fun onChange(pos: Int) {
+                Log.d(TAG, "onChange: $pos")
+            }
+        })
 
     }
 

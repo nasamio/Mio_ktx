@@ -15,5 +15,22 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/black" />
+
+        <!--        <com.mio.base.view.BottomTabView-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="100dp"-->
+        <!--            app:menu="@menu/bnv_wxdh"-->
+        <!--            app:defaultCheckPos="1"-->
+        <!--            android:background="@color/white_80"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent" />-->
+
+        <com.mio.base.view.BottomTab
+            android:id="@+id/bt"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            app:callbackImmediately="true"
+            app:defaultCheckPos="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:menu="@menu/bnv_wxdh" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

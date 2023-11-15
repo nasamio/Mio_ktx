@@ -7,13 +7,21 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
 import android.graphics.Rect
+import android.graphics.drawable.ColorDrawable
 import android.view.Gravity
+import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.view.animation.LayoutAnimationController
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.view.menu.MenuBuilder
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.databinding.Observable
+import androidx.databinding.ObservableBoolean
+import androidx.databinding.ObservableInt
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction.TRANSIT_NONE
 import androidx.recyclerview.widget.RecyclerView
@@ -280,4 +288,87 @@ fun ViewGroup.layoutAnimationFrom(animId: Int, duration: Long = 400) {
     val animation = AnimationUtils.loadAnimation(context, animId)
     animation.duration = duration
     layoutAnimation = LayoutAnimationController(animation)
+}
+
+@SuppressLint("RestrictedApi")
+fun Context.parseMenu(menuId: Int): MenuBuilder {
+    val menuBuilder = MenuBuilder(this)
+    MenuInflater(this).inflate(
+        menuId, menuBuilder
+    )
+    return menuBuilder
+}
+
+fun View.size(width: Int, height: Int) {
+    val lp = layoutParams
+    lp.apply {
+        this.width = width
+        this.height = height
+    }
+    layoutParams = lp
+}
+
+fun ObservableBoolean.addChangeCallback(callback: (Boolean) -> Unit) {
+    this.addOnPropertyChangedCallback(object : Observable.OnPropertyChangedCallback() {
+        override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
+            sender?.let {
+                callback((sender as ObservableBoolean).get())
+            }
+        }
+    })
+}
+
+fun ObservableInt.addChangeCallback(callback: (Int) -> Unit) {
+    this.addOnPropertyChangedCallback(object : Observable.OnPropertyChangedCallback() {
+        override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
+            sender?.let {
+                callback((sender as ObservableInt).get())
+            }
+        }
+    })
+}
+
+fun View.scaleXx(toScale: Float, duration: Long = ANIMATION_DURATION): ObjectAnimator {
+    return ObjectAnimator.ofFloat(this, "scaleX", scaleX, toScale).setDuration(duration)
+}
+
+fun View.scaleYy(toScale: Float, duration: Long = ANIMATION_DURATION): ObjectAnimator {
+    return ObjectAnimator.ofFloat(this, "scaleY", scaleY, toScale).setDuration(duration)
+}
+
+fun View.bgColor(
+    endColor: Int,
+    startColor:Int = 0,
+    duration: Long = ANIMATION_DURATION
+): ObjectAnimator {
+    val colorAnimator = ObjectAnimator.ofArgb(
+        this, "backgroundColor",
+        startColor,  endColor
+    )
+    colorAnimator.duration = duration
+    return colorAnimator
+}
+
+fun TextView.textColor(
+    endColor: Int,
+    duration: Long = ANIMATION_DURATION
+): ObjectAnimator {
+    val colorAnimator = ObjectAnimator.ofArgb(this, "textColor", endColor)
+    colorAnimator.duration = duration
+    return colorAnimator
+}
+
+fun View.topMargin(margin: Int) {
+    margin(top = margin)
+}
+
+fun View.margin(left: Int = 0, top: Int = 0, right: Int = 0, bottom: Int = 0) {
+    val lp = layoutParams as ConstraintLayout.LayoutParams
+    lp.apply {
+        leftMargin = left
+        topMargin = top
+        rightMargin = right
+        bottomMargin = bottom
+    }
+    layoutParams = lp
 }

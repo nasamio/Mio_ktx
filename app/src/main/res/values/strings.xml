@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Mio_ktx</string>
+    <string name="calling_record">最近通话</string>
+    <string name="contact">联系人</string>
 </resources>

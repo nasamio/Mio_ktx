@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--    <declare-styleable name="BottomTabView">-->
+    <!--        <attr name="menu" format="reference" />-->
+    <!--        <attr name="defaultCheckPos" format="integer" />-->
+    <!--    </declare-styleable>-->
+    <declare-styleable name="BottomTab">
+        <attr name="menu" format="reference" />
+        <attr name="topMargin" format="dimension" />
+        <attr name="marginBetweenImg2Text" format="dimension" />
+        <attr name="defaultCheckPos" format="integer" />
+        <attr name="imgFactor" format="float" />
+        <attr name="textSize" format="dimension" />
+        <attr name="scaleFactor" format="float" />
+        <!--        是否开始时立即进行一次pos回调-->
+        <attr name="callbackImmediately" format="boolean" />
+    </declare-styleable>
+</resources>
