@@ -175,7 +175,7 @@ class BottomTab(context: Context, attrs: AttributeSet) : ViewGroup(context, attr
         onCheckChange = listener
     }
 
-    interface OnCheckChangeListener {
+    public interface OnCheckChangeListener {
         fun onChange(pos: Int)
     }
 }
