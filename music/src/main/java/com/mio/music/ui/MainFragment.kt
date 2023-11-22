@@ -85,6 +85,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
 
     @SuppressLint("SdCardPath")
     override fun initData() {
+        // 从本地加载音乐
         AndPermission.with(mContext)
             .runtime()
             .permission(

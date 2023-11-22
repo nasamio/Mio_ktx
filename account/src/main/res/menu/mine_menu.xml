@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/app"
+        android:icon="@drawable/app"
+        android:title="应用" />
+    <item
+        android:id="@+id/browser"
+        android:icon="@drawable/browser"
+        android:title="浏览器" />
+    <item
+        android:id="@+id/camera"
+        android:icon="@drawable/camera"
+        android:title="相机" />
+    <item
+        android:id="@+id/cart"
+        android:icon="@drawable/cart"
+        android:title="购物车" />
+    <item
+        android:id="@+id/computer"
+        android:icon="@drawable/computer"
+        android:title="电脑" />
+    <item
+        android:id="@+id/download"
+        android:icon="@drawable/download"
+        android:title="下载" />
+    <item
+        android:id="@+id/folder"
+        android:icon="@drawable/folder"
+        android:title="文件夹" />
+    <item
+        android:id="@+id/rest"
+        android:icon="@drawable/rest"
+        android:title="休息" />
+
+</menu>

@@ -15,4 +15,7 @@
         <!--        是否开始时立即进行一次pos回调-->
         <attr name="callbackImmediately" format="boolean" />
     </declare-styleable>
+    <declare-styleable name="ArcImageView">
+        <attr name="arcHeight" format="dimension" />
+    </declare-styleable>
 </resources>

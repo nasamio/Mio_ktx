@@ -27,6 +27,14 @@ import kotlin.math.min
 
 class BottomTab(context: Context, attrs: AttributeSet) : ViewGroup(context, attrs) {
     private val TAG = "BottomTab"
+    var menuId: Int = -1 // menu id
+        set(value) {
+            if (value != field) {
+                field = value
+                removeAllViews()
+                addItemView(value)
+            }
+        }
     lateinit var menu: Menu // 加载的item
 
     var itemTopMargin = 20.dp // item 上边距
@@ -49,7 +57,6 @@ class BottomTab(context: Context, attrs: AttributeSet) : ViewGroup(context, attr
     init {
         val ta = context.obtainStyledAttributes(attrs, R.styleable.BottomTab)
         ta.apply {
-            val menuId = ta.getResourceId(R.styleable.BottomTab_menu, 0)
             itemTopMargin =
                 ta.getDimension(R.styleable.BottomTab_topMargin, itemTopMargin.toFloat()).toInt()
             itemMarginBetweenImg2Text = ta.getDimension(
@@ -63,6 +70,9 @@ class BottomTab(context: Context, attrs: AttributeSet) : ViewGroup(context, attr
             callbackImmediately =
                 ta.getBoolean(R.styleable.BottomTab_callbackImmediately, callbackImmediately)
 
+            if (menuId == -1) {
+                menuId = ta.getResourceId(R.styleable.BottomTab_menu, 0)
+            }
             addItemView(menuId)
             ta.recycle()
         }

@@ -1,5 +1,7 @@
 package com.mio.base
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
@@ -8,9 +10,11 @@ import android.content.Intent
 import android.content.res.Resources
 import android.graphics.Rect
 import android.graphics.drawable.ColorDrawable
+import android.util.Log
 import android.view.Gravity
 import android.view.MenuInflater
 import android.view.View
+import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.view.animation.LayoutAnimationController
@@ -24,9 +28,11 @@ import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableInt
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction.TRANSIT_NONE
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
+import com.mio.base.Tag.TAG
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -206,10 +212,23 @@ fun View.alpha(toAlpha: Float, duration: Long = ANIMATION_DURATION): ObjectAnima
 /**
  * 传入多个动画对象 一起运行
  */
-fun Context.playTogether(vararg animators: ObjectAnimator) {
+fun Context.playTogether(
+    vararg animators: ObjectAnimator,
+    startListener: () -> Unit = {},
+    endListener: () -> Unit = {}
+) {
     val animatorSet = AnimatorSet()
     animatorSet.playTogether(*animators)
     animatorSet.start()
+    animatorSet.addListener(object : AnimatorListenerAdapter() {
+        override fun onAnimationStart(animation: Animator) {
+            startListener()
+        }
+
+        override fun onAnimationEnd(animation: Animator) {
+            endListener()
+        }
+    })
 }
 
 /**
@@ -308,7 +327,10 @@ fun View.size(width: Int, height: Int) {
     layoutParams = lp
 }
 
-fun ObservableBoolean.addChangeCallback(callback: (Boolean) -> Unit) {
+fun ObservableBoolean.addChangeCallback(
+    autoCallbackOnce: Boolean = false,/*是否自动回调一次*/
+    callback: (Boolean) -> Unit,
+) {
     this.addOnPropertyChangedCallback(object : Observable.OnPropertyChangedCallback() {
         override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
             sender?.let {
@@ -316,9 +338,15 @@ fun ObservableBoolean.addChangeCallback(callback: (Boolean) -> Unit) {
             }
         }
     })
+    if (autoCallbackOnce) {
+        callback(this.get())
+    }
 }
 
-fun ObservableInt.addChangeCallback(callback: (Int) -> Unit) {
+fun ObservableInt.addChangeCallback(
+    autoCallbackOnce: Boolean = false,
+    callback: (Int) -> Unit
+) {
     this.addOnPropertyChangedCallback(object : Observable.OnPropertyChangedCallback() {
         override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
             sender?.let {
@@ -326,6 +354,9 @@ fun ObservableInt.addChangeCallback(callback: (Int) -> Unit) {
             }
         }
     })
+    if (autoCallbackOnce) {
+        callback(this.get())
+    }
 }
 
 fun View.scaleXx(toScale: Float, duration: Long = ANIMATION_DURATION): ObjectAnimator {
@@ -338,12 +369,12 @@ fun View.scaleYy(toScale: Float, duration: Long = ANIMATION_DURATION): ObjectAni
 
 fun View.bgColor(
     endColor: Int,
-    startColor:Int = 0,
+    startColor: Int = 0,
     duration: Long = ANIMATION_DURATION
 ): ObjectAnimator {
     val colorAnimator = ObjectAnimator.ofArgb(
         this, "backgroundColor",
-        startColor,  endColor
+        startColor, endColor
     )
     colorAnimator.duration = duration
     return colorAnimator
@@ -363,12 +394,91 @@ fun View.topMargin(margin: Int) {
 }
 
 fun View.margin(left: Int = 0, top: Int = 0, right: Int = 0, bottom: Int = 0) {
-    val lp = layoutParams as ConstraintLayout.LayoutParams
-    lp.apply {
-        leftMargin = left
-        topMargin = top
-        rightMargin = right
-        bottomMargin = bottom
+    layoutParams?.let {
+        val lp = if (it is ConstraintLayout.LayoutParams) {
+            ConstraintLayout.LayoutParams(it)
+        } else {
+            ViewGroup.MarginLayoutParams(it)
+        }
+        lp.apply {
+            this.leftMargin = left
+            this.topMargin = top
+            this.rightMargin = right
+            this.bottomMargin = bottom
+        }
+        layoutParams = lp
     }
-    layoutParams = lp
+}
+
+fun RecyclerView.setGridRvItemDecoration(margin: Int, onlyInner: Boolean = false) {
+    addItemDecoration(object :
+        RecyclerView.ItemDecoration() {
+        override fun getItemOffsets(
+            outRect: Rect,
+            itemPosition: Int,
+            parent: RecyclerView
+        ) {
+            super.getItemOffsets(outRect, itemPosition, parent)
+            val spanCount =
+                (parent.layoutManager as GridLayoutManager).spanCount
+            val xInt = itemPosition % spanCount
+            val yInt = itemPosition / spanCount
+            if (onlyInner) {
+                if (xInt != 0) {
+                    outRect.left = margin
+                }
+                if (yInt != 0) {
+                    outRect.top = margin
+                }
+            } else {
+                // 实现每一行之间的间距一致
+                if (itemPosition >= spanCount) {
+                    outRect.bottom = margin
+                } else {
+                    outRect.top = margin
+                    outRect.bottom = margin
+                }
+            }
+        }
+    })
+}
+
+/**
+ * 防重复点击
+ */
+fun View.setClickListener(duration: Long = 300, listener: OnClickListener) {
+    setOnClickListener(object : OnClickListener {
+        var lastClickTime = 0L
+        override fun onClick(v: View?) {
+            val currentTimeMillis = System.currentTimeMillis()
+            if (currentTimeMillis - lastClickTime > duration) {
+                lastClickTime = currentTimeMillis
+                listener.onClick(v)
+            }
+        }
+    })
+}
+
+fun View.setAnimationClickListener(
+    scale: Float = 1.1f,
+    durationL: Long = 300,
+    listener: OnClickListener
+) {
+    setOnClickListener {
+        context.playTogether(
+            this.scaleXx(scale, durationL / 2),
+            this.scaleYy(scale, durationL / 2),
+            this.alpha(0.9f, durationL / 2),
+            endListener = {
+                context.playTogether(
+                    this.scaleXx(1f, durationL / 2),
+                    this.scaleYy(1f, durationL / 2),
+                    this.alpha(1f, durationL / 2),
+                    endListener = {
+                        listener.onClick(this)
+                    }
+                )
+            }
+        )
+    }
 }
