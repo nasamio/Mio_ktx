@@ -43,4 +43,5 @@
     <color name="white_85">#57FFFFFF</color>
     <color name="white_90">#5CFFFFFF</color>
     <color name="white_95">#61FFFFFF</color>
+    <color name="lcv_check">#FFB9C0</color>
 </resources>

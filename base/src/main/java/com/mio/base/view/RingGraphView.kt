@@ -10,12 +10,14 @@ import android.text.StaticLayout
 import android.text.TextPaint
 import android.util.AttributeSet
 import android.util.Log
+import android.view.MotionEvent
 import android.view.View
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.mio.base.R
 import com.mio.base.Tag.TAG
 import com.mio.base.dp
 import com.mio.base.extension.devimals
+import kotlin.math.atan2
 import kotlin.math.cos
 import kotlin.math.sin
 
@@ -174,7 +176,7 @@ class RingGraphView(context: Context, attrs: AttributeSet) : View(context, attrs
         canvas: Canvas,
         angle: Float,
         text: String,
-        len: Float = line1Len.toFloat()
+        len: Float = line1Len.toFloat(),
     ) {
         val a = Math.toRadians(angle.toDouble()).toFloat()
         val startX = cx + (radius + ringWidth / 2f + len) * cos(a)
@@ -202,6 +204,20 @@ class RingGraphView(context: Context, attrs: AttributeSet) : View(context, attrs
             cy + (radius + ringWidth / 2f + len) * sin(a),
             textPaint
         )
+    }
+
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        when (event?.action) {
+            MotionEvent.ACTION_UP -> {
+                // 计算触摸点与圆心和realStartAngle的夹角
+                val x = event.x
+                val y = event.y
+                val a =
+                    Math.toDegrees(atan2((y - cy).toDouble(), (x - cx).toDouble())).toFloat()
+                Log.d(TAG, "onTouchEvent: a: $a")
+            }
+        }
+        return super.onTouchEvent(event)
     }
 
     public data class RingData(

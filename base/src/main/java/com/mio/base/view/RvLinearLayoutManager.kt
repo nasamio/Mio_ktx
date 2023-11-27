@@ -6,11 +6,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 class RvLinearLayoutManager(context: Context, orientation: Int, reverseLayout: Boolean = false) :
     LinearLayoutManager(context, orientation, false) {
     var isScrollEnabled = true
+    var canScrollHorizontal = true
+    var canScrollVertical = true
     override fun canScrollVertically(): Boolean {
-        return super.canScrollVertically() && isScrollEnabled
+        return canScrollHorizontal && isScrollEnabled
     }
 
     override fun canScrollHorizontally(): Boolean {
-        return super.canScrollHorizontally() && isScrollEnabled
+        return canScrollVertical && isScrollEnabled
     }
 }

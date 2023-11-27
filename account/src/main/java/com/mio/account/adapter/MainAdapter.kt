@@ -52,6 +52,7 @@ import com.mio.base.margin
 import com.mio.base.parseMenu
 import com.mio.base.setClickListener
 import com.mio.base.setGridRvItemDecoration
+import com.mio.base.utils.RvHelper
 import com.mio.base.view.RingGraphView
 import com.mio.base.view.RvLinearLayoutManager
 import kotlinx.coroutines.DelicateCoroutinesApi
@@ -199,10 +200,6 @@ class MainAdapter : BaseMultiItemQuickAdapter<ItemBean, BaseViewHolder>() {
             }
             false
         }
-
-        val user = User("", "")
-        user.toJson()
-
     }
 
     private fun bindCat(
