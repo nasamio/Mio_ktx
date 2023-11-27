@@ -23,7 +23,7 @@ data class User(
     )
 
     fun useDays(): Int {
-        return ((vipTime.normalTime() - System.currentTimeMillis()) / (1000 * 60 * 60 * 24)).toInt()
+        return ((System.currentTimeMillis() - createTime.normalTime()) / (1000 * 60 * 60 * 24)).toInt()
     }
 
     fun isVip(): Boolean {

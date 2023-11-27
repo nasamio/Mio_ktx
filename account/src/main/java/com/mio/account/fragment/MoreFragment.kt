@@ -4,6 +4,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mio.account.R
 import com.mio.account.adapter.ItemBean
+import com.mio.account.adapter.ItemBean.Companion.TITLE
 import com.mio.account.adapter.ItemBean.Companion.TITLE_MENU
 import com.mio.account.adapter.MainAdapter
 import com.mio.account.databinding.FragmentMoreBinding
@@ -22,7 +23,6 @@ class MoreFragment : BaseFragment<FragmentMoreBinding>(R.layout.fragment_more) {
             adapter = rvAdapter
             layoutManager = LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false)
         }
-        mDataBinding.tvMore.bg(mContext.getColor(R.color.bg_green), 10.dp.toFloat())
     }
 
     override fun initObserver() {
@@ -31,7 +31,8 @@ class MoreFragment : BaseFragment<FragmentMoreBinding>(R.layout.fragment_more) {
     override fun initData() {
         lifecycleScope.launch {
             rvAdapter.setNewInstance(
-                mutableListOf<ItemBean>(
+                mutableListOf(
+                    ItemBean(TITLE, "更多"),
                     ItemBean(TITLE_MENU, R.menu.menu_wlgl, "往来管理", "来而不往非礼也"),
                     ItemBean(TITLE_MENU, R.menu.menu_wlgl, "计划", "自动执行，记账更轻松"),
                 )
