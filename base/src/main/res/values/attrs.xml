@@ -18,4 +18,22 @@
     <declare-styleable name="ArcImageView">
         <attr name="arcHeight" format="dimension" />
     </declare-styleable>
+
+
+    <declare-styleable name="UBaseView">
+        <attr name="cx" format="dimension" /> <!-- 圆心x坐标 -->
+        <attr name="cy" format="dimension" /> <!-- 圆心y坐标 -->
+        <attr name="mass" format="float" /> <!-- 质量 -->
+        <attr name="volume" format="float" /> <!-- 体积 -->
+        <attr name="density" format="float" /> <!-- 密度 -->
+        <attr name="vx" format="float" /> <!-- 速度x分量 -->
+        <attr name="vy" format="float" /> <!-- 速度y分量 -->
+        <attr name="ax" format="float" /> <!-- 加速度x分量 -->
+        <attr name="ay" format="float" /> <!-- 加速度y分量 -->
+        <attr name="e" format="float" /> <!-- 弹性系数 -->
+        <attr name="color" format="color" /> <!-- 颜色 -->
+
+    </declare-styleable>
+
+
 </resources>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.mio.base.view.GravityVp
+            android:id="@+id/vp_universe"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!--            <com.mio.base.view.u.Circle-->
+            <!--                android:layout_width="30dp"-->
+            <!--                android:layout_height="30dp"-->
+            <!--                app:color="@color/lcv_check"-->
+            <!--                app:cx="300dp"-->
+            <!--                app:cy="100dp"-->
+            <!--                app:vy="10" />-->
+
+            <!--            <com.mio.base.view.u.Circle-->
+            <!--                android:layout_width="30dp"-->
+            <!--                android:layout_height="30dp"-->
+            <!--                app:color="@color/black_30"-->
+            <!--                app:cx="100dp"-->
+            <!--                app:cy="100dp"-->
+            <!--                app:e="1.4"-->
+            <!--                app:vy="-10" />-->
+
+            <!--            <com.mio.base.view.u.Circle-->
+            <!--                android:layout_width="30dp"-->
+            <!--                android:layout_height="30dp"-->
+            <!--                app:color="@color/black_30"-->
+            <!--                app:cx="200dp"-->
+            <!--                app:cy="244dp"-->
+            <!--                app:e="1.4"-->
+            <!--                app:vy="-10" />-->
+
+
+            <!--            <com.mio.base.view.u.Circle-->
+            <!--                android:layout_width="30dp"-->
+            <!--                android:layout_height="30dp"-->
+            <!--                app:color="@color/design_default_color_primary"-->
+            <!--                app:cx="200dp"-->
+            <!--                app:cy="200dp"-->
+            <!--                app:mass="10"-->
+            <!--                app:vy="-1" />-->
+
+
+        </com.mio.base.view.GravityVp>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginBottom="50dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
