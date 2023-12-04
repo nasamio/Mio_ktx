@@ -1,32 +1,28 @@
 package com.mio.account.bean
 
-import android.os.Build
-import androidx.annotation.RequiresApi
-import com.mio.base.extension.normalTime
+import com.mio.account.utils.Helper
+import kotlinx.serialization.Serializable
 
 
+@Serializable
 data class User(
+    var id: Int,
     var name: String,
     var password: String,
-    var id: Int,
-    var level: Int,
-    var createTime: String,
-    var vipTime: String
+    var level: Int?,
+    var createTime: Long?,
+    var vipTime: Long?,
 ) {
-    constructor(name: String, password: String) : this(
+    constructor(
+        name: String,
+        password: String,
+    ) : this(
+        0,
         name,
         password,
         0,
-        0,
-        "2023-11-22T05:33:54.000+00:00",
-        "2023-11-22T05:33:54.000+00:00"
+        Helper.now(),
+        Helper.now()
     )
-
-    fun useDays(): Int {
-        return ((System.currentTimeMillis() - createTime.normalTime()) / (1000 * 60 * 60 * 24)).toInt()
-    }
-
-    fun isVip(): Boolean {
-        return vipTime.normalTime() >= System.currentTimeMillis()
-    }
 }
+

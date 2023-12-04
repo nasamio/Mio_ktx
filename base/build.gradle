@@ -8,7 +8,7 @@ android {
     compileSdk 33
 
     defaultConfig {
-        minSdk 26
+        minSdk 23
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -43,5 +43,17 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
     implementation "com.squareup.retrofit2:converter-gson:2.9.0"
+
+    implementation "io.ktor:ktor-server-core-jvm"
+    implementation "io.ktor:ktor-server-netty-jvm"
+    implementation "io.ktor:ktor-server-default-headers-jvm:2.3.6"
+    implementation "io.ktor:ktor-server-host-common-jvm:2.3.6"
+    implementation "io.ktor:ktor-server-host-jvm:2.3.6"
+    implementation "io.ktor:ktor-server-netty:2.3.6"
+    implementation "io.ktor:ktor-server-servlet:2.3.6"
+    implementation "io.ktor:ktor-server-test-host:2.3.6"
+    implementation "io.ktor:ktor-server-websockets:2.3.6"
+    implementation "io.ktor:ktor-server-features:2.3.6"
+
 
 }

@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.mio.account"
-        minSdk 26
+        minSdk 23
         targetSdk 34
         versionCode 1
         versionName "1.0"
@@ -37,6 +37,8 @@ android {
     }
 }
 
+
+
 dependencies {
 
     implementation 'androidx.core:core-ktx:1.10.1'
@@ -62,6 +64,19 @@ dependencies {
     //retrofit依赖RxJava
     implementation "com.squareup.retrofit2:adapter-rxjava:2.9.0"
 
+    // ktor
+    implementation "io.ktor:ktor-client-android:1.6.4"
+    // JsonFeature
+    implementation "io.ktor:ktor-client-json:1.6.4"
+    // ktor-client-gson
+    implementation "io.ktor:ktor-client-gson:1.6.4"
+    // ktor-client-serialization-jvm
+    implementation "io.ktor:ktor-client-serialization-jvm:1.6.4"
+
+    String exposed_version = "0.45.0"
+
+    implementation "org.jetbrains.exposed:exposed-kotlin-datetime:$exposed_version"
+    implementation 'com.yanzhenjie:permission:2.0.3'
 
 //    implementation 'android.arch.lifecycle:extensions:1.1.1'
 //    //协程

@@ -308,15 +308,15 @@ class MainAdapter : BaseMultiItemQuickAdapter<ItemBean, BaseViewHolder>() {
                         withContext(Dispatchers.Main) {
                             user?.let {
                                 binding.tvVip.text = "高级会员"
-                                binding.tvTime.text =
-                                    if (System.currentTimeMillis() > it.vipTime.normalTime()) {
-                                        "已过期"
-                                    } else {
-                                        "${
-                                            it.vipTime.substring(0, it.vipTime.indexOf("."))
-                                                .replace("T", " ")
-                                        }到期"
-                                    }
+//                                binding.tvTime.text =
+//                                    if (System.currentTimeMillis() > it.vipTime.normalTime()) {
+//                                        "已过期"
+//                                    } else {
+//                                        "${
+//                                            it.vipTime.substring(0, it.vipTime.indexOf("."))
+//                                                .replace("T", " ")
+//                                        }到期"
+//                                    }
                             }
                         }
                     }
@@ -360,7 +360,7 @@ class MainAdapter : BaseMultiItemQuickAdapter<ItemBean, BaseViewHolder>() {
                             user?.let {
                                 binding.tvUserName.text = it.name
                                 binding.tvUserId.text = "ID: ${it.id}"
-                                binding.tvDuration.text = "${it.useDays()}"
+//                                binding.tvDuration.text = "${it.useDays()}"
                             }
                         }
                     }
@@ -389,14 +389,14 @@ class MainAdapter : BaseMultiItemQuickAdapter<ItemBean, BaseViewHolder>() {
     private fun showLogin() {
         DialogHelper.showLoginDialog(context) { name, pwd ->
             // Log.d(TAG, "bindUser: name: $name, pwd: $pwd")
-            GlobalScope.launch(Dispatchers.IO) {
-                NetHelper.apiService.login(
-                    User(name, pwd)
-                ).getHandledData()?.let {
-                    App.sharedPreferencesHelper.saveString("user", it.toJson())
-                    App.hasLogin.set(true)
-                }
-            }
+//            GlobalScope.launch(Dispatchers.IO) {
+//                NetHelper.apiService.login(
+//                    User(name, pwd)
+//                ).getHandledData()?.let {
+//                    App.sharedPreferencesHelper.saveString("user", it.toJson())
+//                    App.hasLogin.set(true)
+//                }
+//            }
         }
     }
 

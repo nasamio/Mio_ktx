@@ -9,7 +9,7 @@ import com.mio.base.view.BottomTab
 abstract class BaseFragmentActivity
     (
     val fragments: MutableList<BaseFragment<*>>,
-    val menu: Int
+    val menu: Int,
 ) : BaseActivity<ActivityFragmentBinding>(R.layout.activity_fragment) {
     private val checkPos: ObservableInt by lazy {
         ObservableInt(-1)
@@ -24,9 +24,13 @@ abstract class BaseFragmentActivity
         })
         mDataBinding.bt.menuId = this.menu
 
-        checkPos.addChangeCallback {
-            toFragment(R.id.fl_con, currentFragment, fragments[it])
-            currentFragment = fragments[it]
+        try {
+            checkPos.addChangeCallback {
+                toFragment(R.id.fl_con, currentFragment, fragments[it])
+                currentFragment = fragments[it]
+            }
+        } catch (IllegalStateException: Exception) {
+            Log.e(TAG, "initView: ", IllegalStateException)
         }
 
         checkPos.set(0)
