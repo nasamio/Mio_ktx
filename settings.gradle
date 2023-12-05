@@ -40,3 +40,5 @@ include ':music' // 听歌模块
 //include ':weather' // 天气模块
 include ':script' // 脚本模块
 include ':account' // 记账模块
+include ':yolo'
+include ':yolov5'
