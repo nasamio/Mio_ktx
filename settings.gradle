@@ -40,5 +40,6 @@ include ':music' // 听歌模块
 //include ':weather' // 天气模块
 include ':script' // 脚本模块
 include ':account' // 记账模块
-include ':yolo'
-include ':yolov5'
+include ':yolo' // nihui 使用yolo的模块
+include ':yolov5' // 重写之后的yolov5模块
+include ':compose' // 学习compose的模块
