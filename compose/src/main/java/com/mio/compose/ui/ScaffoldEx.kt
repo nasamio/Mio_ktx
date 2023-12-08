@@ -1,88 +1,82 @@
 package com.mio.compose.ui
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
+import androidx.compose.material.LocalContentColor
 import androidx.compose.material.Scaffold
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.mio.compose.bean.BottomNavItem
 import kotlinx.coroutines.CoroutineScope
 
-data class BottomNavItem(
-    val title: String,
-    val icon: ImageVector,
-)
 
 /**
  * 脚手架的使用demo
  */
+@Preview
 @Composable
 fun ScaffoldEx(
-    tabs: List<BottomNavItem> = listOf(),
-    coroutinesScope: CoroutineScope = rememberCoroutineScope(),
-    tabClickListener: (Int) -> Unit = {},
-    navigationClickListener: () -> Unit = {},
-    searchListener: () -> Unit = {},
-    menuClickListener: (Int) -> Unit = {},
+    tabs: List<BottomNavItem> = listOf(), // 底部导航栏
+    hasLogin: Boolean = false, // 是否登录
+
+    coroutinesScope: CoroutineScope = rememberCoroutineScope(), // 协程作用域
+    tabClickListener: (Int) -> Unit = {}, // 底部导航栏点击事件
+    navigationClickListener: () -> Unit = {}, // 导航栏点击事件
+    searchListener: () -> Unit = {}, // 搜索点击事件
+    menuClickListener: (Int) -> Unit = {}, // 菜单点击事件
 ) {
-    var selectedTabIndex by remember { mutableIntStateOf(0) }
+    var selectedTabIndex by remember { mutableStateOf(0) }
 
     Scaffold(
-        topBar = {
-            TopAppBar(
-                title = {
-                    Row {
-                        Text(
-                            text = tabs[selectedTabIndex].title,
-                            modifier = Modifier
-                                .align(Alignment.CenterVertically)
-                                .padding(start = 8.dp)
-                        )
-                    }
-                },
-                navigationIcon = {
-                    IconButton(onClick = { navigationClickListener() }) {
-                        Icon(Icons.Filled.Menu, contentDescription = null)
-                    }
-                },
-                actions = {
-                    IconButton(onClick = { searchListener() }) {
-                        Icon(Icons.Filled.Search, contentDescription = null)
-                    }
-                    IconButton(onClick = {
-                        // todo show menu
-                    }) {
-                        Icon(Icons.Filled.MoreVert, contentDescription = null)
-                    }
-                }
-            )
-        },
         bottomBar = {
             BottomNavigation {
                 tabs.forEachIndexed { index, tab ->
                     BottomNavigationItem(
-                        icon = { Icon(tab.icon, contentDescription = null) },
+                        icon = {
+                            val isSelected = selectedTabIndex == index
+                            val iconModifier = Modifier
+                                .padding(4.dp)
+                                .size(if (isSelected) 32.dp else 24.dp)
+                                .clip(MaterialTheme.shapes.small)
+
+                            Image(
+                                painterResource(tab.icon),
+                                contentDescription = null,
+                                modifier = iconModifier,
+                                colorFilter = ColorFilter.tint(
+                                    if (isSelected) Color.White
+                                    else LocalContentColor.current
+                                )
+                            )
+                        },
                         label = { Text(tab.title) },
                         selected = selectedTabIndex == index,
                         onClick = {
@@ -107,6 +101,10 @@ fun ScaffoldEx(
         }
     }
 
+    // 如果没有登录，显示登录弹窗
+    if (!hasLogin) {
+        LoginDialog()
+    }
 }
 
 

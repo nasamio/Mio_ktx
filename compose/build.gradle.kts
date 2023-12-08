@@ -94,6 +94,23 @@ dependencies {
     // 导入本地base模块
     implementation(project(mapOf("path" to ":base")))
 
+    // 网络请求
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    // retrofit 依赖 Gson
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    // OkHttp
+    implementation("com.squareup.okhttp3:okhttp:3.2.0")
+    // retrofit 依赖 RxJava
+    implementation("com.squareup.retrofit2:adapter-rxjava:2.9.0")
+
+    // ktor
+    implementation("io.ktor:ktor-client-android:1.6.4")
+    // JsonFeature
+    implementation("io.ktor:ktor-client-json:1.6.4")
+    // ktor-client-gson
+    implementation("io.ktor:ktor-client-gson:1.6.4")
+    // ktor-client-serialization-jvm
+    implementation("io.ktor:ktor-client-serialization-jvm:1.6.4")
 
 
 }
