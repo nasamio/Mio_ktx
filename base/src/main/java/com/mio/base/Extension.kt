@@ -482,3 +482,8 @@ fun View.setAnimationClickListener(
         )
     }
 }
+
+
+fun ViewGroup.defaultAnimation() {
+    layoutAnimationFrom(R.anim.default_show)
+}

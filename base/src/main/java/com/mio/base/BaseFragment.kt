@@ -89,6 +89,15 @@ abstract class BaseFragment<T : ViewDataBinding>(
         return R.layout.layout_loading
     }
 
+    override fun onHiddenChanged(hidden: Boolean) {
+        if (!hidden){
+            (mDataBinding.root as ViewGroup).let {
+                it.defaultAnimation()
+                it.layoutAnimation.start()
+            }
+        }
+    }
+
     open fun showError() {
         onError()
 

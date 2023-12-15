@@ -34,10 +34,10 @@ class GravityVp(context: Context, attributeSet: AttributeSet) : ViewGroup(contex
                 // 计算碰撞后的速度
                 val afterSpeed =
                     UUtils.calculateCollision(view.mass, view.vx, view.vy, it.mass, it.vx, it.vy)
-                Log.d(
-                    TAG,
-                    "update: before: ${view.vx},${view.vy},after: ${afterSpeed.first},${afterSpeed.second * if (view.vy > 0) -1f else 1f}"
-                )
+//                Log.d(
+//                    TAG,
+//                    "update: before: ${view.vx},${view.vy},after: ${afterSpeed.first},${afterSpeed.second * if (view.vy > 0) -1f else 1f}"
+//                )
                 view.vx = afterSpeed.first * if (view.vx > 0) -1f else 1f // 只考虑相对碰撞,不考虑侧方碰撞
                 view.vy = afterSpeed.second * if (view.vy > 0) -1f else 1f// 只考虑相对碰撞,不考虑侧方碰撞
 
@@ -46,7 +46,7 @@ class GravityVp(context: Context, attributeSet: AttributeSet) : ViewGroup(contex
             }
             view.update(time)
             view.tag = index.toString()
-            Log.d(TAG, "update: index:${view.tag},speed x: ${view.vx}, y: ${view.vy}")
+//            Log.d(TAG, "update: index:${view.tag},speed x: ${view.vx}, y: ${view.vy}")
         }
 
         // 碰撞检测

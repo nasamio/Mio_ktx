@@ -34,6 +34,13 @@ android {
     dataBinding {
         enabled = true
     }
+//    // python
+//    python {
+//        buildPython "D:\\env\\python/python.exe"
+//        pip {
+//            install "numpy"
+//        }
+//    }
 }
 
 dependencies {
@@ -49,5 +56,12 @@ dependencies {
     implementation project(':base')
 
     implementation 'com.github.li-xiaojun:StateLayout:1.3.4'
+
+    implementation 'com.google.mlkit:text-recognition:16.0.0'
+    implementation 'com.google.mlkit:text-recognition-chinese:16.0.0'
+
+    implementation 'com.google.mlkit:face-detection:16.1.5'
+    // 图像标签 图形识别
+    implementation 'com.google.mlkit:image-labeling:17.0.7'
 }
 
