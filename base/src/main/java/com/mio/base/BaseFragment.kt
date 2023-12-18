@@ -28,11 +28,12 @@ abstract class BaseFragment<T : ViewDataBinding>(
     private var state: UiState = UiState.Content
     lateinit var loadingView: View
     lateinit var errorView: View
+    var needAnimatorEveryTime: Boolean = true // 是否每次返回都执行layout animator
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
 
         mRootBinding = DataBindingUtil.inflate(inflater, R.layout.layout_root, container, false)
@@ -90,7 +91,7 @@ abstract class BaseFragment<T : ViewDataBinding>(
     }
 
     override fun onHiddenChanged(hidden: Boolean) {
-        if (!hidden){
+        if (!hidden && needAnimatorEveryTime) {
             (mDataBinding.root as ViewGroup).let {
                 it.defaultAnimation()
                 it.layoutAnimation.start()
