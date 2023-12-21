@@ -138,6 +138,7 @@ abstract class BaseFragment<T : ViewDataBinding>(
             loadingView.findViewById<ProgressBar>(R.id.progress)
                 ?.let {
                     while (state == UiState.Loading) {
+                        it.background = null // 这里不知道为什么xml设置不行
                         it.progress = it.progress + 2
                         delay(100)
                     }

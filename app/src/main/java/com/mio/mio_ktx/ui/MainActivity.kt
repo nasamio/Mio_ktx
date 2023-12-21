@@ -3,6 +3,7 @@ package com.mio.mio_ktx.ui
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Log
+import android.view.View.INVISIBLE
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.lifecycleScope
 import com.google.mlkit.vision.common.InputImage
@@ -22,6 +23,7 @@ import com.mio.base.replaceFragment
 import com.mio.base.view.BottomTab
 import com.mio.mio_ktx.R
 import com.mio.mio_ktx.databinding.ActivityMainBinding
+import com.mio.mio_ktx.ui.mqtt.MqttHelper
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -50,19 +52,38 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             }
         })
 
+        mDataBinding.bt.visibility = INVISIBLE
+
         val startTime = System.currentTimeMillis()
         // 文字识别
 //        testRec()
         // 人脸检测
 //        testFaceRec()
         // 物体识别
-        testObjRec()
+//        testObjRec()
 
         val endTime = System.currentTimeMillis()
+
+        testMqtt()
+
         val duration = endTime - startTime
         Log.d(TAG, "测试耗时: $duration")
     }
 
+    /**
+     * mqtt测试
+     */
+    private fun testMqtt() {
+//        lifecycleScope.launch {
+//            delay(500)
+//            MqttHelper.init(this@MainActivity)
+//
+//        }
+    }
+
+    /**
+     * 初始化数据
+     */
     override fun initData() {
     }
 
