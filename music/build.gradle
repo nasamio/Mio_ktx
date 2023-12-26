@@ -56,4 +56,19 @@ dependencies {
 
     implementation("io.github.cymchad:BaseRecyclerViewAdapterHelper:3.0.14")
 
+    // ktor
+    implementation "io.ktor:ktor-client-android:1.6.4"
+    // JsonFeature
+    implementation "io.ktor:ktor-client-json:1.6.4"
+    // ktor-client-gson
+    implementation "io.ktor:ktor-client-gson:1.6.4"
+    // ktor-client-serialization-jvm
+    implementation "io.ktor:ktor-client-serialization-jvm:1.6.4"
+
+    String exposed_version = "0.45.0"
+
+    implementation "org.jetbrains.exposed:exposed-kotlin-datetime:$exposed_version"
+
+    // xpop
+    implementation 'com.github.li-xiaojun:XPopup:2.9.19'
 }

@@ -64,30 +64,30 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             return@setOnNavigationItemSelectedListener true
         }
 
-        miniBinding = DataBindingUtil.bind(mDataBinding.mini.root)!!
-        miniBinding.apply {
-            imgPlay.setOnClickListener {
-                MusicManager.apply {
-                    if (isPlaying()) pauseMusic() else resumeMusic()
-                }
-            }
-            imgNext.setOnClickListener { MusicManager.playNext() }
-            imgPrevious.setOnClickListener { MusicManager.playPrevious() }
-        }
-
-        MusicManager.setPlayingStatusCallback {
-            miniBinding.imgPlay.setImageResource(
-                if (it) R.drawable.ic_pause
-                else R.drawable.ic_play
-            )
-        }
-
-        MusicManager.setProgressCallback {
-            Log.d(TAG, "initView: progress: $it")
-
-            setProgress(it)
-        }
-        MusicManager.initialize()
+//        miniBinding = DataBindingUtil.bind(mDataBinding.mini.root)!!
+//        miniBinding.apply {
+//            imgPlay.setOnClickListener {
+//                MusicManager.apply {
+//                    if (isPlaying()) pauseMusic() else resumeMusic()
+//                }
+//            }
+//            imgNext.setOnClickListener { MusicManager.playNext() }
+//            imgPrevious.setOnClickListener { MusicManager.playPrevious() }
+//        }
+//
+//        MusicManager.setPlayingStatusCallback {
+//            miniBinding.imgPlay.setImageResource(
+//                if (it) R.drawable.ic_pause
+//                else R.drawable.ic_play
+//            )
+//        }
+//
+//        MusicManager.setProgressCallback {
+////            Log.d(TAG, "initView: progress: $it")
+//
+//            setProgress(it)
+//        }
+//        MusicManager.initialize()
 
     }
 
