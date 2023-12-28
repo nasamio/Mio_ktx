@@ -1,66 +1,42 @@
-package com.mio.music.ui.view
+package com.mio.music.ui.activity
 
-import android.annotation.SuppressLint
-import android.content.Context
-import android.view.KeyEvent
-import android.view.LayoutInflater
-import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
+import android.content.Intent
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lxj.statelayout.StateLayout
-import com.lxj.xpopup.core.BottomPopupView
+import com.mio.base.BaseActivity
 import com.mio.base.dp
-import com.mio.base.extension.toast
-import com.mio.music.App
 import com.mio.music.R
 import com.mio.music.data.Song
 import com.mio.music.databinding.LayoutSongListBinding
-import com.mio.music.helper.KtorHelper
+import com.mio.music.helper.LiveDataBus
 import com.mio.music.loadImage
 import com.mio.music.manager.MusicPlayer
 import com.mio.music.ui.adapter.RvSongListAdapter
 import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import kotlin.math.abs
 
-@SuppressLint("ViewConstructor")
-class SongListPopupView(
-    context: Context,
-    private var songs: List<Song>,
-    private val iconUrl: String?,
-    private val title: String?,
-    private val userUrl: String?,
-    private val userName: String?,
-) :
-    BottomPopupView(context) {
-    private lateinit var mDataBinding: LayoutSongListBinding
-
+class SongListActivity : BaseActivity<LayoutSongListBinding>(R.layout.layout_song_list) {
     private val rvAdapter: RvSongListAdapter = RvSongListAdapter()
 
     private val state: StateLayout by lazy {
-        StateLayout(context).wrap(mDataBinding.rvSongList)
+        StateLayout(this).wrap(mDataBinding.rvSongList)
     }
+    private var songs: MutableList<Song> = mutableListOf()
+    private var iconUrl: String? = null
+    private var title: String? = null
+    private var userUrl: String? = null
+    private var userName: String? = null
+    override fun initView() {
+        songs =
+            (LiveDataBus.get().with("songs", MutableList::class.java).value as MutableList<Song>?)!!
+        iconUrl = LiveDataBus.get().with("iconUrl", String::class.java).value
+        title = LiveDataBus.get().with("title", String::class.java).value
+        userUrl = LiveDataBus.get().with("userUrl", String::class.java).value
+        userName = LiveDataBus.get().with("userName", String::class.java).value
 
-    override fun addInnerContent() {
-        val contentView =
-            LayoutInflater.from(context).inflate(implLayoutId, bottomPopupContainer, false)
-        bottomPopupContainer.addView(contentView)
-        mDataBinding = DataBindingUtil.bind(contentView)!!
-        initView()
-        initData()
-        popupInfo.apply {
-            // 状态栏
-            hasStatusBarShadow = false
-            hasStatusBar = false
-            animationDuration = 400
-            enableDrag = true
-        }
-    }
-
-    private fun initView() {
         mDataBinding.rvSongList.apply {
             adapter = rvAdapter
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -84,7 +60,7 @@ class SongListPopupView(
             tvAuthor.text = userName
             tvTitleTop.text = title
             ivBack.setOnClickListener {
-                smartDismiss()
+                finish()
             }
 
             ivPlayAll.setOnClickListener {
@@ -105,45 +81,20 @@ class SongListPopupView(
         state.showLoading()
     }
 
+    override fun initObserver() {
+    }
+
     @OptIn(DelicateCoroutinesApi::class)
-    private fun initData() {
-        postDelayed({
+    override fun initData() {
+        lifecycleScope.launch {
+            delay(500)
             if (songs.isEmpty()) {
                 state.showEmpty()
             } else {
                 rvAdapter.setList(songs)
                 state.showContent()
             }
-        }, 500)
-    }
-
-    override fun getPopupWidth(): Int {
-        return ViewGroup.LayoutParams.MATCH_PARENT
-    }
-
-    override fun getPopupHeight(): Int {
-        return ViewGroup.LayoutParams.MATCH_PARENT
-    }
-
-    override fun getImplLayoutId(): Int {
-        return R.layout.layout_song_list
-    }
-
-    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            smartDismiss()
-            return true
         }
-        return super.onKeyDown(keyCode, event)
     }
 
-    override fun onShow() {
-        super.onShow()
-        App.shouMiniOffsetY = false
-    }
-
-    override fun onDismiss() {
-        super.onDismiss()
-        App.shouMiniOffsetY = true
-    }
 }

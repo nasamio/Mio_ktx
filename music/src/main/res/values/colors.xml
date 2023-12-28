@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="red">#F7434D</color>
+    <color name="progress_indicator">#C62828</color>
 </resources>

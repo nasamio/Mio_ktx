@@ -1,19 +1,14 @@
 package com.mio.music
 
-import MusicManager
+import DialogHelper
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.forEachIndexed
 import androidx.core.view.get
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import com.lxj.xpopup.XPopup
 import com.mio.base.BaseActivity
 import com.mio.base.BaseQuickFragmentVpAdapter
-import com.mio.base.Tag.TAG
+import com.mio.base.addChangeCallback
 import com.mio.base.addOnPageSelectListener
 import com.mio.base.setClickListener
 import com.mio.base.toast
@@ -21,13 +16,13 @@ import com.mio.music.databinding.ActivityMainBinding
 import com.mio.music.databinding.LayoutMiniPlayerBinding
 import com.mio.music.helper.KtorHelper
 import com.mio.music.helper.UserHelper
+import com.mio.music.manager.MusicPlayer
 import com.mio.music.ui.MainFragment
 import com.mio.music.ui.MineFragment
 import com.mio.music.ui.ToolsFragment
 import com.mio.music.ui.VideoFragment
 import com.mio.music.ui.view.LoginView
-import com.yanzhenjie.permission.AndPermission
-import com.yanzhenjie.permission.runtime.Permission
+import com.mio.music.ui.view.MiniView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -46,7 +41,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         )
     }
 
-    private lateinit var miniBinding: LayoutMiniPlayerBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -63,6 +57,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
         super.onCreate(savedInstanceState)
     }
+
+
 
     /**
      * 检查权限
@@ -154,10 +150,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             }
             return@setOnNavigationItemSelectedListener true
         }
-    }
-
-    private fun setProgress(p: Float) {
-        miniBinding.vProgress.progress = (p * 100f).toInt()
     }
 
     override fun initObserver() {

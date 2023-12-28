@@ -25,6 +25,7 @@ import androidx.appcompat.view.menu.MenuBuilder
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.Observable
 import androidx.databinding.ObservableBoolean
+import androidx.databinding.ObservableFloat
 import androidx.databinding.ObservableInt
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction.TRANSIT_NONE
@@ -351,6 +352,22 @@ fun ObservableInt.addChangeCallback(
         override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
             sender?.let {
                 callback((sender as ObservableInt).get())
+            }
+        }
+    })
+    if (autoCallbackOnce) {
+        callback(this.get())
+    }
+}
+
+fun ObservableFloat.addChangeCallback(
+    autoCallbackOnce: Boolean = false,
+    callback: (Float) -> Unit
+) {
+    this.addOnPropertyChangedCallback(object : Observable.OnPropertyChangedCallback() {
+        override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
+            sender?.let {
+                callback((sender as ObservableFloat).get())
             }
         }
     })
