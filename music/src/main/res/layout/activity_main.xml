@@ -19,13 +19,6 @@
             app:layout_constraintBottom_toTopOf="@+id/bnv"
             app:layout_constraintTop_toTopOf="parent" />
 
-<!--        <include-->
-        <!--            android:id="@+id/mini"-->
-        <!--            layout="@layout/layout_mini_player"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="100dp"-->
-        <!--            app:layout_constraintBottom_toTopOf="@id/bnv" />-->
-
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bnv"
             android:layout_width="match_parent"

@@ -1,8 +1,18 @@
 package com.mio.music
 
 import android.annotation.SuppressLint
+import android.graphics.drawable.Drawable
 import android.view.MotionEvent
 import android.view.View
+import android.widget.ImageView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.Request
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.target.SizeReadyCallback
+import com.bumptech.glide.request.transition.Transition
 import com.mio.music.data.Music
 import java.io.File
 import java.security.MessageDigest
@@ -79,4 +89,35 @@ fun Float.formatToTwoDecimalPlaces(): Float {
 
 fun Double.formatToTwoDecimalPlaces(): Double {
     return String.format("%.2f", this).toDouble()
+}
+
+fun ImageView.loadImage(path: String, cornerRadius: Int = 0) {
+    val requestOptions = if (cornerRadius > 0) {
+        RequestOptions().transforms(CenterCrop(), RoundedCorners(cornerRadius))
+    } else {
+        RequestOptions().transform(CenterCrop())
+    }
+
+    Glide.with(this)
+        .load(path)
+        .apply(requestOptions)
+        .into(this)
+}
+
+fun View.loadBg(path: String) {
+    Glide.with(this)
+        .load(path)
+        .centerCrop()
+        .into(object : CustomTarget<Drawable>() {
+            override fun onResourceReady(
+                resource: Drawable,
+                transition: Transition<in Drawable>?,
+            ) {
+                background = resource
+            }
+
+            override fun onLoadCleared(placeholder: Drawable?) {
+                // Optional: You can do something when the resource is cleared.
+            }
+        })
 }

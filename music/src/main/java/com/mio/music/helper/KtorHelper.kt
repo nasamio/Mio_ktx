@@ -2,6 +2,10 @@ package com.mio.music.helper
 
 import com.mio.music.data.BaseResponse
 import com.mio.music.data.LoginBean
+import com.mio.music.data.RecommendBean
+import com.mio.music.data.Song
+import com.mio.music.data.SongListResponse
+import com.mio.music.data.UrlResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.call.receive
 import io.ktor.client.engine.android.Android
@@ -51,6 +55,40 @@ object KtorHelper {
             parameter("md5_password", md5_password)
         } as HttpResponse).receive<LoginBean>()
     }
+
+    /**
+     * 推荐歌单
+     */
+    suspend fun recommendList(): RecommendBean {
+        return (client.get("$BASE_URL/recommend/resource")
+                as HttpResponse).receive<RecommendBean>()
+    }
+
+    /**
+     * 获取歌单
+     */
+    suspend fun getSongList(
+        id: Long,
+        limit: Int = -1,
+        offset: Int = 0,
+    ): SongListResponse {
+        return (client.get("$BASE_URL/playlist/track/all") {
+            contentType(ContentType.Application.Json)
+            parameter("id", id)
+            if (limit != -1) parameter("limit", limit)
+            parameter("offset", offset)
+        } as HttpResponse).receive<SongListResponse>()
+    }
+
+    suspend fun getSongUrl(
+        id: Long,
+    ): UrlResponse {
+        return (client.get("$BASE_URL/song/url") {
+            contentType(ContentType.Application.Json)
+            parameter("id", id)
+        } as HttpResponse).receive<UrlResponse>()
+    }
+
 //
 //    suspend fun register(user: User): BaseResponse<User> {
 //        return (client.post("$BASE_URL/register") {
