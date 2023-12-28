@@ -1,9 +1,9 @@
 package com.mio.music.helper
 
 import com.mio.music.data.BaseResponse
+import com.mio.music.data.ILikeResponse
 import com.mio.music.data.LoginBean
 import com.mio.music.data.RecommendBean
-import com.mio.music.data.Song
 import com.mio.music.data.SongListResponse
 import com.mio.music.data.UrlResponse
 import io.ktor.client.HttpClient
@@ -27,6 +27,8 @@ object KtorHelper {
     }
     private const val BASE_URL = "http://117.50.190.141:3000"
 
+    val useTimeStamp = true
+
     /**
      * 发送验证码
      */
@@ -34,6 +36,8 @@ object KtorHelper {
         return (client.get("$BASE_URL/captcha/sent") {
             contentType(ContentType.Application.Json)
             parameter("phone", num)
+
+            if (useTimeStamp) parameter("timestamp", System.currentTimeMillis())
         } as HttpResponse).receive<BaseResponse<Boolean>>()
     }
 
@@ -53,6 +57,8 @@ object KtorHelper {
             parameter("captcha", captcha)
             parameter("password", password)
             parameter("md5_password", md5_password)
+
+            if (useTimeStamp) parameter("timestamp", System.currentTimeMillis())
         } as HttpResponse).receive<LoginBean>()
     }
 
@@ -60,8 +66,9 @@ object KtorHelper {
      * 推荐歌单
      */
     suspend fun recommendList(): RecommendBean {
-        return (client.get("$BASE_URL/recommend/resource")
-                as HttpResponse).receive<RecommendBean>()
+        return (client.get("$BASE_URL/recommend/resource") {
+            if (useTimeStamp) parameter("timestamp", System.currentTimeMillis())
+        } as HttpResponse).receive<RecommendBean>()
     }
 
     /**
@@ -77,6 +84,8 @@ object KtorHelper {
             parameter("id", id)
             if (limit != -1) parameter("limit", limit)
             parameter("offset", offset)
+
+            if (useTimeStamp) parameter("timestamp", System.currentTimeMillis())
         } as HttpResponse).receive<SongListResponse>()
     }
 
@@ -86,8 +95,47 @@ object KtorHelper {
         return (client.get("$BASE_URL/song/url") {
             contentType(ContentType.Application.Json)
             parameter("id", id)
+
+            if (useTimeStamp) parameter("timestamp", System.currentTimeMillis())
         } as HttpResponse).receive<UrlResponse>()
     }
+
+    /**
+     * 获取我喜欢的音乐
+     */
+    suspend fun getILike(
+        uid: Long,
+    ): ILikeResponse {
+        return (client.get("$BASE_URL/likelist") {
+            contentType(ContentType.Application.Json)
+            parameter("uid", uid)
+
+//            if (useTimeStamp) parameter("timestamp", System.currentTimeMillis())
+        } as HttpResponse).receive<ILikeResponse>()
+    }
+
+    /**
+     * 获取歌曲详情 多个id用，隔开
+     */
+    suspend fun getSongDetail(
+        ids: MutableList<Long>,
+    ): SongListResponse {
+        return (client.get("$BASE_URL/song/detail") {
+            contentType(ContentType.Application.Json)
+            parameter("ids", ids.joinToString(","))
+
+            if (useTimeStamp) parameter("timestamp", System.currentTimeMillis())
+        } as HttpResponse).receive<SongListResponse>()
+    }
+
+//    suspend fun getUserDetail(
+//        uid: Long,
+//    ): BaseResponse<Account> {
+//        return (client.get("$BASE_URL/user/detail") {
+//            contentType(ContentType.Application.Json)
+//            parameter("uid", uid)
+//        } as HttpResponse).receive<BaseResponse<Account>>()
+//    }
 
 //
 //    suspend fun register(user: User): BaseResponse<User> {

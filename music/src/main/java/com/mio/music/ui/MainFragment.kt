@@ -46,9 +46,9 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
             setNewData(
                 mutableListOf(
                     RvMainContentAdapter.RvMainContentItem("推荐歌单", RECOMMEND_LIST),
-                    RvMainContentAdapter.RvMainContentItem("私人FM", PERSONAL_FM),
-                    RvMainContentAdapter.RvMainContentItem("音乐列表", MUSIC_LIST),
-                    RvMainContentAdapter.RvMainContentItem("音乐排行榜", MUSIC_RANK),
+                    RvMainContentAdapter.RvMainContentItem("我喜欢", I_LIKE),
+                    RvMainContentAdapter.RvMainContentItem("音乐列表", CREATED_MUSIC_LIST),
+                    RvMainContentAdapter.RvMainContentItem("音乐排行榜", COLLECTED_MUSIC_LIST),
                 )
             )
         }

@@ -2,7 +2,6 @@ package com.mio.music.ui.view
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,11 +9,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lxj.statelayout.StateLayout
 import com.lxj.xpopup.core.BottomPopupView
-import com.mio.base.Tag.TAG
 import com.mio.base.dp
 import com.mio.base.extension.toast
 import com.mio.music.R
-import com.mio.music.data.RecommendItem
+import com.mio.music.data.Song
 import com.mio.music.databinding.LayoutSongListBinding
 import com.mio.music.helper.KtorHelper
 import com.mio.music.loadImage
@@ -28,7 +26,14 @@ import kotlinx.coroutines.withContext
 import kotlin.math.abs
 
 @SuppressLint("ViewConstructor")
-class SongListPopupView(context: Context, private var recommendItem: RecommendItem) :
+class SongListPopupView(
+    context: Context,
+    private var songs: List<Song>,
+    private val iconUrl: String?,
+    private val title: String?,
+    private val userUrl: String?,
+    private val userName: String?,
+) :
     BottomPopupView(context) {
     private lateinit var mDataBinding: LayoutSongListBinding
 
@@ -72,12 +77,11 @@ class SongListPopupView(context: Context, private var recommendItem: RecommendIt
         }
 
         mDataBinding.apply {
-            ivImage.loadImage(recommendItem.picUrl, 5.dp)
-            tvTitle.text = recommendItem.name
-            ivAuthor.loadImage(recommendItem.creator.avatarUrl, 20.dp)
-            tvAuthor.text = recommendItem.creator.nickname
-            tvTitleTop.text = recommendItem.name
-
+            ivImage.loadImage(iconUrl, 5.dp)
+            tvTitle.text = title
+            ivAuthor.loadImage(userUrl, 20.dp)
+            tvAuthor.text = userName
+            tvTitleTop.text = title
             ivBack.setOnClickListener {
                 smartDismiss()
             }
@@ -102,19 +106,14 @@ class SongListPopupView(context: Context, private var recommendItem: RecommendIt
 
     @OptIn(DelicateCoroutinesApi::class)
     private fun initData() {
-
-        GlobalScope.launch {
-            val songListResponse = KtorHelper.getSongList(recommendItem.id)
-            withContext(Dispatchers.Main) {
-                if (songListResponse.code == 200 && (songListResponse.songs?.isNotEmpty() == true)) {
-                    state.showContent()
-                    rvAdapter.setList(songListResponse.songs.toMutableList())
-                } else {
-                    state.showError()
-                    context.toast("获取歌单失败")
-                }
+        postDelayed({
+            if (songs.isEmpty()) {
+                state.showEmpty()
+            } else {
+                rvAdapter.setList(songs)
+                state.showContent()
             }
-        }
+        }, 500)
     }
 
     override fun getPopupWidth(): Int {

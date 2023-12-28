@@ -91,7 +91,7 @@ fun Double.formatToTwoDecimalPlaces(): Double {
     return String.format("%.2f", this).toDouble()
 }
 
-fun ImageView.loadImage(path: String, cornerRadius: Int = 0) {
+fun ImageView.loadImage(path: String?, cornerRadius: Int = 0) {
     val requestOptions = if (cornerRadius > 0) {
         RequestOptions().transforms(CenterCrop(), RoundedCorners(cornerRadius))
     } else {
@@ -104,10 +104,24 @@ fun ImageView.loadImage(path: String, cornerRadius: Int = 0) {
         .into(this)
 }
 
-fun View.loadBg(path: String) {
+fun View.loadBg(path: String?, width: Int = 0, height: Int = 0, cornerRadius: Int = 0) {
+    val imgPath =
+        if (width > 0 && height > 0 && path != null) {
+            path + "?param=${width}y${height}"
+        } else {
+            path
+        }
+
+    val requestOptions = if (cornerRadius > 0) {
+        RequestOptions().transforms(CenterCrop(), RoundedCorners(cornerRadius))
+    } else {
+        RequestOptions().transform(CenterCrop())
+    }
+
     Glide.with(this)
-        .load(path)
+        .load(imgPath)
         .centerCrop()
+        .apply(requestOptions)
         .into(object : CustomTarget<Drawable>() {
             override fun onResourceReady(
                 resource: Drawable,

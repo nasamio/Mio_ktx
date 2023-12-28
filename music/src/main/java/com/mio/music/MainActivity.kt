@@ -117,6 +117,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                                     UserHelper.apply {
                                         account = response.account
                                         token = response.token
+                                        uid = response.profile.userId.toLong()
+                                        nickname = response.profile.nickname
+                                        avatarUrl = response.profile.avatarUrl
+                                        backgroundUrl = response.profile.backgroundUrl
                                         profile = response.profile
                                         bindings = response.bindings
                                         cookie = response.cookie
