@@ -2,12 +2,15 @@ package com.mio.music
 
 import DialogHelper
 import android.os.Bundle
+import android.util.Log
 import androidx.core.view.forEachIndexed
 import androidx.core.view.get
 import androidx.lifecycle.lifecycleScope
 import com.lxj.xpopup.XPopup
 import com.mio.base.BaseActivity
 import com.mio.base.BaseQuickFragmentVpAdapter
+import com.mio.base.Tag
+import com.mio.base.Tag.TAG
 import com.mio.base.addChangeCallback
 import com.mio.base.addOnPageSelectListener
 import com.mio.base.setClickListener
@@ -24,6 +27,10 @@ import com.mio.music.ui.VideoFragment
 import com.mio.music.ui.view.LoginView
 import com.mio.music.ui.view.MiniView
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.net.ConnectException
@@ -55,9 +62,30 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         checkPermission()
         checkLoginState()
 
+        lifecycleScope.launch {
+            testFlow()
+            stateFlow.value = 2
+        }
+
         super.onCreate(savedInstanceState)
     }
 
+    val stateFlow = MutableStateFlow(1)
+    private suspend fun testFlow() {
+        val flow = flow<Int> {
+            for (i in 1..10) {
+                emit(i)
+            }
+        }.collect {
+            Log.d(Tag.TAG, "testFlow: $it")
+        }
+
+        stateFlow.collect {
+            Log.d(TAG, "testFlow: $it")
+        }
+
+
+    }
 
 
     /**
