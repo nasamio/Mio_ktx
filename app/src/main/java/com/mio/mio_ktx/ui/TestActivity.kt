@@ -1,13 +1,13 @@
 package com.mio.mio_ktx.ui
 
+import android.annotation.SuppressLint
 import com.mio.base.BaseActivity
+import com.mio.base.addProgressCallback
 import com.mio.base.databinding.ItemCellBinding
-import com.mio.base.setClickListener
 import com.mio.base.view.adapter.BaseRvAdapter
 import com.mio.base.view.table.User
 import com.mio.mio_ktx.R
 import com.mio.mio_ktx.databinding.ActivityTestBinding
-import com.mio.mio_ktx.databinding.ItemTestBinding
 
 class TestActivity : BaseActivity<ActivityTestBinding>(R.layout.activity_test) {
     val rvAdapter = object : BaseRvAdapter<User, ItemCellBinding>(
@@ -18,15 +18,30 @@ class TestActivity : BaseActivity<ActivityTestBinding>(R.layout.activity_test) {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     override fun initView() {
         mDataBinding.rv.apply {
             adapter = rvAdapter
             layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
         }
 
-        mDataBinding.mtv.setData(
-            getTestData()
-        )
+        // 监听seekbar拖动进度
+        mDataBinding.sbRotation.addProgressCallback { progress, _ ->
+            mDataBinding.mtv.rotation = progress * 1f
+            mDataBinding.tvRotation.text = "rotationZ: ${progress * 1f}"
+        }
+        mDataBinding.sbRotationX.addProgressCallback { progress, _ ->
+            mDataBinding.mtv.rotationX = progress * 1f
+            mDataBinding.tvRotationX.text = "rotationX: ${progress * 1f}"
+        }
+        mDataBinding.sbRotationY.addProgressCallback { progress, _ ->
+            mDataBinding.mtv.rotationY = progress * 1f
+            mDataBinding.tvRotationY.text = "rotationY: ${progress * 1f}"
+        }
+
+//        mDataBinding.mtv.setData(
+//            getTestData()
+//        )
 //        mDataBinding.rv.visibility = android.view.View.VISIBLE
 //        mDataBinding.mtv.visibility = android.view.View.GONE
 //        mDataBinding.rv.postDelayed(

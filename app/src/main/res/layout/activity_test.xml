@@ -18,12 +18,64 @@
             android:visibility="invisible"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <com.mio.base.view.table.MTable
+        <com.mio.base.view.D3View
             android:id="@+id/mtv"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_rotationY"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="rotationY:0.0"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toTopOf="@id/tv_rotationX"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatSeekBar
+            android:id="@+id/sb_rotationY"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_rotationY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_rotationY" />
+
+        <TextView
+            android:id="@+id/tv_rotationX"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="rotationX:0.0"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toTopOf="@id/tv_rotation"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatSeekBar
+            android:id="@+id/sb_rotationX"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_rotationX"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_rotationX" />
+
+        <TextView
+            android:id="@+id/tv_rotation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="rotationZ:0.0"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatSeekBar
+            android:id="@+id/sb_rotation"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_rotation" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

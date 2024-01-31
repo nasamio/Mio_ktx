@@ -14,7 +14,11 @@
             <option value="$PROJECT_DIR$/base" />
             <option value="$PROJECT_DIR$/compose" />
             <option value="$PROJECT_DIR$/filemanager" />
+            <option value="$PROJECT_DIR$/game" />
+            <option value="$PROJECT_DIR$/launcher" />
+            <option value="$PROJECT_DIR$/launcher_ktx" />
             <option value="$PROJECT_DIR$/music" />
+            <option value="$PROJECT_DIR$/pathplanning" />
             <option value="$PROJECT_DIR$/script" />
             <option value="$PROJECT_DIR$/yolo" />
             <option value="$PROJECT_DIR$/yolov5" />

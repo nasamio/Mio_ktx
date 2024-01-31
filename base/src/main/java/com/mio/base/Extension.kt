@@ -18,6 +18,7 @@ import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.view.animation.LayoutAnimationController
+import android.widget.SeekBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -178,7 +179,7 @@ const val ANIMATION_DURATION: Long = 500
 fun View.translation(
     direction: Int,
     length: Float,
-    duration: Long = ANIMATION_DURATION
+    duration: Long = ANIMATION_DURATION,
 ): ObjectAnimator {
     val propertyName = when (direction) {
         Gravity.LEFT -> "translationX"
@@ -216,7 +217,7 @@ fun View.alpha(toAlpha: Float, duration: Long = ANIMATION_DURATION): ObjectAnima
 fun Context.playTogether(
     vararg animators: ObjectAnimator,
     startListener: () -> Unit = {},
-    endListener: () -> Unit = {}
+    endListener: () -> Unit = {},
 ) {
     val animatorSet = AnimatorSet()
     animatorSet.playTogether(*animators)
@@ -240,7 +241,7 @@ fun RecyclerView.setItemMargin(margin: Int) {
         override fun getItemOffsets(
             outRect: Rect,
             itemPosition: Int,
-            parent: RecyclerView
+            parent: RecyclerView,
         ) {
             outRect.left = margin
             outRect.right = margin
@@ -287,7 +288,7 @@ fun ViewPager.addOnPageSelectListener(listener: (Int) -> Unit) {
         override fun onPageScrolled(
             position: Int,
             positionOffset: Float,
-            positionOffsetPixels: Int
+            positionOffsetPixels: Int,
         ) {
         }
 
@@ -346,7 +347,7 @@ fun ObservableBoolean.addChangeCallback(
 
 fun ObservableInt.addChangeCallback(
     autoCallbackOnce: Boolean = false,
-    callback: (Int) -> Unit
+    callback: (Int) -> Unit,
 ) {
     this.addOnPropertyChangedCallback(object : Observable.OnPropertyChangedCallback() {
         override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
@@ -362,7 +363,7 @@ fun ObservableInt.addChangeCallback(
 
 fun ObservableFloat.addChangeCallback(
     autoCallbackOnce: Boolean = false,
-    callback: (Float) -> Unit
+    callback: (Float) -> Unit,
 ) {
     this.addOnPropertyChangedCallback(object : Observable.OnPropertyChangedCallback() {
         override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
@@ -387,7 +388,7 @@ fun View.scaleYy(toScale: Float, duration: Long = ANIMATION_DURATION): ObjectAni
 fun View.bgColor(
     endColor: Int,
     startColor: Int = 0,
-    duration: Long = ANIMATION_DURATION
+    duration: Long = ANIMATION_DURATION,
 ): ObjectAnimator {
     val colorAnimator = ObjectAnimator.ofArgb(
         this, "backgroundColor",
@@ -399,7 +400,7 @@ fun View.bgColor(
 
 fun TextView.textColor(
     endColor: Int,
-    duration: Long = ANIMATION_DURATION
+    duration: Long = ANIMATION_DURATION,
 ): ObjectAnimator {
     val colorAnimator = ObjectAnimator.ofArgb(this, "textColor", endColor)
     colorAnimator.duration = duration
@@ -433,7 +434,7 @@ fun RecyclerView.setGridRvItemDecoration(margin: Int, onlyInner: Boolean = false
         override fun getItemOffsets(
             outRect: Rect,
             itemPosition: Int,
-            parent: RecyclerView
+            parent: RecyclerView,
         ) {
             super.getItemOffsets(outRect, itemPosition, parent)
             val spanCount =
@@ -479,7 +480,7 @@ fun View.setClickListener(duration: Long = 300, listener: OnClickListener) {
 fun View.setAnimationClickListener(
     scale: Float = 1.1f,
     durationL: Long = 300,
-    listener: OnClickListener
+    listener: OnClickListener,
 ) {
     setOnClickListener {
         context.playTogether(
@@ -503,4 +504,25 @@ fun View.setAnimationClickListener(
 
 fun ViewGroup.defaultAnimation() {
     layoutAnimationFrom(R.anim.default_show)
+}
+
+fun SeekBar.addProgressCallback(
+    callback: (Int, Boolean) -> Unit,
+) {
+    setOnSeekBarChangeListener(object :
+        android.widget.SeekBar.OnSeekBarChangeListener {
+        override fun onProgressChanged(
+            seekBar: android.widget.SeekBar?,
+            progress: Int,
+            fromUser: Boolean,
+        ) {
+            callback(progress, fromUser)
+        }
+
+        override fun onStartTrackingTouch(seekBar: android.widget.SeekBar?) {
+        }
+
+        override fun onStopTrackingTouch(seekBar: android.widget.SeekBar?) {
+        }
+    })
 }

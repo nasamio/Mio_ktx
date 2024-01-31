@@ -6,7 +6,20 @@
         <State />
       </entry>
       <entry key="app">
-        <State />
+        <State>
+          <runningDeviceTargetSelectedWithDropDown>
+            <Target>
+              <type value="RUNNING_DEVICE_TARGET" />
+              <deviceKey>
+                <Key>
+                  <type value="SERIAL_NUMBER" />
+                  <value value="emulator-5554" />
+                </Key>
+              </deviceKey>
+            </Target>
+          </runningDeviceTargetSelectedWithDropDown>
+          <timeTargetWasSelectedWithDropDown value="2024-01-26T01:57:51.782076500Z" />
+        </State>
       </entry>
       <entry key="compose">
         <State />
@@ -14,7 +27,19 @@
       <entry key="filemanager">
         <State />
       </entry>
+      <entry key="game">
+        <State />
+      </entry>
+      <entry key="launcher">
+        <State />
+      </entry>
+      <entry key="launcher_ktx">
+        <State />
+      </entry>
       <entry key="music">
+        <State />
+      </entry>
+      <entry key="pathplanning">
         <State />
       </entry>
       <entry key="yolo">
