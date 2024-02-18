@@ -6,22 +6,12 @@
         <State />
       </entry>
       <entry key="app">
-        <State>
-          <runningDeviceTargetSelectedWithDropDown>
-            <Target>
-              <type value="RUNNING_DEVICE_TARGET" />
-              <deviceKey>
-                <Key>
-                  <type value="SERIAL_NUMBER" />
-                  <value value="emulator-5554" />
-                </Key>
-              </deviceKey>
-            </Target>
-          </runningDeviceTargetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2024-01-26T01:57:51.782076500Z" />
-        </State>
+        <State />
       </entry>
       <entry key="compose">
+        <State />
+      </entry>
+      <entry key="enc">
         <State />
       </entry>
       <entry key="filemanager">

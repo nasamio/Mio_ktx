@@ -47,3 +47,5 @@ include ':launcher'
 include ':pathplanning'
 include ':game'
 include ':launcher_ktx'
+include ':enc'
+//include(':net.sf.capcode.library.S57Library')

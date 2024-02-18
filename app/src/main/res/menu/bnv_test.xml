@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/components"
+        android:icon="@drawable/basic_components"
+        android:title="基础组件" />
+
+    <item
+        android:id="@+id/map"
+        android:icon="@drawable/map"
+        android:title="地图" />
+    <item
+        android:id="@+id/video"
+        android:icon="@drawable/video"
+        android:title="视频" />
+
+    <item
+        android:id="@+id/mine"
+        android:icon="@drawable/smile"
+        android:title="我的" />
+</menu>

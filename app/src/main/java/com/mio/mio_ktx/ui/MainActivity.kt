@@ -24,6 +24,10 @@ import com.mio.base.view.BottomTab
 import com.mio.mio_ktx.R
 import com.mio.mio_ktx.databinding.ActivityMainBinding
 import com.mio.mio_ktx.ui.mqtt.MqttHelper
+import com.mio.mio_ktx.ui.ui.fragment.ComponentFragment
+import com.mio.mio_ktx.ui.ui.fragment.MapFragment
+import com.mio.mio_ktx.ui.ui.fragment.MineFragment
+import com.mio.mio_ktx.ui.ui.fragment.VideoFragment
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -32,8 +36,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     val fragments: List<BaseFragment<out ViewDataBinding>> by lazy {
         listOf(
-            AFragment(),
-            BFragment(),
+//            AFragment(),
+//            BFragment(),
+            ComponentFragment(),
+            MapFragment(),
+            VideoFragment(),
+            MineFragment()
         )
     }
 
@@ -43,17 +51,20 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         lifecycleScope.launch {
 //            showLoading()
 //            delay(1_200)
-            replaceFragment(R.id.container, AFragment())
+//            replaceFragment(R.id.container, AFragment())
 //            showContent()
         }
         mDataBinding.bt.setCheckedChangeListener(object : BottomTab.OnCheckChangeListener {
             override fun onChange(pos: Int) {
                 Log.d(TAG, "onChange: $pos")
+                replaceFragment(R.id.container, fragments[pos])
             }
         })
 
-        mDataBinding.bt.visibility = INVISIBLE
+        // testOther()
+    }
 
+    private fun testOther() {
         val startTime = System.currentTimeMillis()
         // 文字识别
 //        testRec()

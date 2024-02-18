@@ -73,6 +73,22 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             adapter = mainAdapter
             layoutManager = GridLayoutManager(this@MainActivity, mainViewModel.showCount.value!!)
         }
+        mDataBinding.ivBg.setImageResource(R.drawable.bg)
+
+        startRotateBg()
+    }
+
+    private fun startRotateBg() {
+        mDataBinding.ivBg.apply {
+            rotation -= .1f
+            val factor = 1.9f
+            scaleX = factor
+            scaleY = factor
+
+            postDelayed({
+                startRotateBg()
+            }, 1)
+        }
     }
 
     override fun initObserver() {

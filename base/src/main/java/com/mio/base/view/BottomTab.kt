@@ -84,6 +84,7 @@ class BottomTab(context: Context, attrs: AttributeSet) : ViewGroup(context, attr
         if (menuId != 0) {
             menu = context.parseMenu(menuId)
             val inflater = LayoutInflater.from(context)
+            removeAllViews()
             menu.forEachIndexed { index, item ->
                 Log.d(TAG, "$index: $item")
                 val view = inflater.inflate(R.layout.item_btv, this@BottomTab, false)

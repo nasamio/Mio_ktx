@@ -13,8 +13,9 @@
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/black" />
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/bt"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <!--        <com.mio.base.view.BottomTabView-->
         <!--            android:layout_width="match_parent"-->
@@ -29,8 +30,8 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             app:callbackImmediately="true"
-            app:defaultCheckPos="1"
+            app:defaultCheckPos="0"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:menu="@menu/bnv_wxdh" />
+            app:menu="@menu/bnv_test" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
