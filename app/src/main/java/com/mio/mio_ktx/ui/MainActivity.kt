@@ -96,6 +96,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
      * 初始化数据
      */
     override fun initData() {
+        lifecycleScope.launch {
+            showLoading()
+            delay(2000)
+            showContent()
+            showError()
+        }
     }
 
     override fun initObserver() {

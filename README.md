@@ -73,6 +73,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     override fun initData() {
         // 在这里进行界面数据的获取
+        
+        // 可以设置显示加载状态 有数据之后再显示界面 默认是直接显示页面的
+        showLoading()
+        showContent()
+        showError()
     }
 
     override fun initObserver() {
@@ -119,6 +124,11 @@ class AFragment : BaseFragment<FragmentABinding>(R.layout.fragment_a) {
     }
 
     override fun initData() {
+       // 可以设置显示加载状态 有数据之后再显示界面 默认是直接显示页面的
+       // 对应方法和activity中一致
+        showLoading()
+        showContent()
+        showError()
     }
 }
 
