@@ -1,23 +1,28 @@
 package com.mio.enc
 
-import BytesHelper
+import MyWebSocketClient
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.mio.base.Tag.TAG
-import com.mio.enc.helper.S57Helper
+import com.mio.s57.EncHelper
 import com.yanzhenjie.permission.AndPermission
 import com.yanzhenjie.permission.runtime.Permission
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import org.gdal.gdal.gdal
+import org.gdal.ogr.ogr
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.nio.charset.Charset
 
 class MainActivity : AppCompatActivity() {
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // 权限
@@ -32,14 +37,13 @@ class MainActivity : AppCompatActivity() {
             .permission(Permission.Group.STORAGE)
             .onGranted {
                 // start move
-//                startMove()
+                startMove()
                 // start read
 //                read()
-                testTransform()
+//                testTransform()
 //                lifecycleScope.launch(Dispatchers.IO) {
 ////                    read()
 //                    test()
-//                    read()
 //                }
             }
             .start()
@@ -79,11 +83,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun read() {
         val path = "data/data/${packageName}/files/C1513359.000"
-        S57Helper.init(path)
-        S57Helper.data.forEachIndexed { index, lr ->
-            Log.d(TAG, "read2:$index \n $lr")
+        EncHelper.apply {
+            load(path)
         }
-
     }
 
     /**
@@ -98,8 +100,37 @@ class MainActivity : AppCompatActivity() {
                 "data/data/com.mio.enc/files",
                 "C1513359.000"
             )
+            copyFileFromAssets(
+                this@MainActivity,
+                "gdal-data",
+                "data/data/com.mio.enc",
+                "gdal-data"
+            )
+
         }
         Log.d(TAG, "startMove: end...")
+
+        // read()
+        lifecycleScope.launch(Dispatchers.IO) {
+            // loadLib()
+            delay(2000)
+            // testGdal()
+            testWebSocket()
+        }
+    }
+
+    /**
+     * 一个web socket通信：http://localhost:8888/chat
+     */
+    private fun testWebSocket() {
+        MyWebSocketClient().connectToWebSocket("ws://192.168.2.77:8888/chat",123)
+    }
+
+    private fun loadLib() {
+        System.loadLibrary("gdalconstjni")
+        System.loadLibrary("gdaljni")
+        System.loadLibrary("ogrjni")
+        System.loadLibrary("osrjni")
     }
 
     /**
@@ -147,5 +178,104 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+    
+    
 
+    private fun testGdal() {
+        Log.d(TAG, "testGdal: start...")
+        gdal.AllRegister()
+        gdal.SetConfigOption("GDAL_DATA", "data/data/com.mio.enc/gdal-data")
+//        gdal.set
+
+        val option = gdal.GetConfigOption("GDAL_DATA")
+        Log.d(TAG, "testGdal: $option")
+
+        val ogrDriverCount = ogr.GetDriverCount()
+        val gdalDriverCount = gdal.GetDriverCount()
+        Log.d(TAG, "testGdal: ogr driver count:$ogrDriverCount, gdal driver count:$gdalDriverCount")
+        for (i in 0 until ogr.GetDriverCount()) {
+            val driverName = ogr.GetDriver(i).name
+            Log.d(TAG, "testGdal: $driverName")
+        }
+        val driver = ogr.GetDriverByName("S57")
+        val source = driver.Open("data/data/com.mio.enc/files/C1513359.000")
+        source?.let {
+            val description = it.GetDescription()
+
+
+
+
+            val layerCount = it.GetLayerCount()
+            Log.d(TAG, "testGdal: layer count:$layerCount")
+            for (i in 0 until it.GetLayerCount()) {
+                val layer = it.GetLayer(i)
+                layer?.let {
+                    val layerName = it.GetName()
+                    val featureCount = it.GetFeatureCount()
+                    Log.d(TAG, "testGdal: $layerName, feature count:$featureCount")
+                    for (j in 0 until featureCount) {
+                        val feature = it.GetFeature(j)
+                        feature?.let {
+                            val fieldCount = it.GetFieldCount()
+                            val defnName = it.GetDefnRef().GetName()
+
+                            val getGeometryName = it.GetGeometryRef()?.GetGeometryName()
+                            Log.d(
+                                TAG,
+                                "testGdal: $defnName,${it.GetFID()},$getGeometryName, ${
+                                    it.GetFieldAsString(0)
+                                }"
+                            )
+
+
+
+
+                            for (k in 0 until fieldCount) {
+                                //  Log.d(TAG, "testGdal: field type:$fieldType,value:${it.GetFieldAsString(k)}")
+                                it.GetFieldDefnRef(k)?.let {
+                                    val name = it.GetName()
+                                    val type = it.GetFieldType()
+                                    Log.d(TAG, "testGdal: field name:$name,type:$type")
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
+//        gdal.SetConfigOption("GDAL_DATA", "data/data/com.mio.enc/gdal-data")
+//        Log.d(TAG, "testGadl: driver count1:${gdal.GetDriverCount()}")
+//        val count = ogr.GetDriverCount()
+//        Log.d(TAG, "testGadl: driver count:$count")
+//        for (i in 0 until gdal.GetDriverCount()) {
+//            val driverName = gdal.GetDriver(i).shortName
+//            Log.d(TAG, "testGadl: $driverName")
+//        }
+//
+//        val driver = gdal.GetDriverByName("S57")
+//        Log.d(TAG, "testGadl: driver:$driver")
+//
+//        val ogrCount  = ogr.GetDriverCount()
+//        Log.d(TAG, "testGadl: ogr count:$ogrCount")
+//
+////        val dataSet = driver.Open("data/data/com.mio.enc/files/C1513359.000", 0)
+////
+////        val layerCount = dataSet.GetLayerCount()
+////        Log.d(TAG, "testGadl: layer count:$layerCount")
+//
+//        val openSwig0 = ogrJNI.Open__SWIG_0("data/data/com.mio.enc/files/C1513359.000", 0)
+//        Log.d(TAG, "testGadl: open swing:$openSwig0")
+//
+//        val open = ogr.Open("data/data/com.mio.enc/files/C1513359.000", 0)
+//        Log.d(TAG, "testGadl: file:$open")
+//
+//
+//        gdal.GDALDestroyDriverManager()
+    }
+
+    class TestGadl {
+
+    }
 }

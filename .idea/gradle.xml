@@ -16,13 +16,13 @@
             <option value="$PROJECT_DIR$/enc" />
             <option value="$PROJECT_DIR$/filemanager" />
             <option value="$PROJECT_DIR$/game" />
+            <option value="$PROJECT_DIR$/jni" />
             <option value="$PROJECT_DIR$/launcher" />
             <option value="$PROJECT_DIR$/launcher_ktx" />
             <option value="$PROJECT_DIR$/music" />
             <option value="$PROJECT_DIR$/pathplanning" />
+            <option value="$PROJECT_DIR$/s57" />
             <option value="$PROJECT_DIR$/script" />
-            <option value="$PROJECT_DIR$/yolo" />
-            <option value="$PROJECT_DIR$/yolov5" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />

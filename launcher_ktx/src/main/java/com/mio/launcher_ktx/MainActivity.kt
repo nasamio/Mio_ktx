@@ -80,7 +80,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private fun startRotateBg() {
         mDataBinding.ivBg.apply {
-            rotation -= .1f
+            rotation -= .02f
             val factor = 1.9f
             scaleX = factor
             scaleY = factor

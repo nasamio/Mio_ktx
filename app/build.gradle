@@ -15,6 +15,19 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            //选择要添加的对应 cpu 类型的 .so 库。
+            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a'
+            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
+        }
+
+        manifestPlaceholders = [
+                JPUSH_PKGNAME: "com.mio.mio_ktx",
+                //JPush 上注册的包名对应的 Appkey
+                JPUSH_APPKEY : "01f251185ee4fd64b5c8a067",
+                JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
+        ]
     }
 
     buildTypes {
@@ -41,6 +54,14 @@ android {
 //            install "numpy"
 //        }
 //    }
+
+//    ndk {
+//        //设置支持的架构
+//        abiFilters.add("armeabi")
+//        abiFilters.add("armeabi-v7a")
+//        abiFilters.add("arm64-v8a")
+//    }
+
 }
 
 dependencies {
@@ -74,6 +95,8 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     // gson
     implementation 'com.google.code.gson:gson:2.8.9'
-
+    // 极光
+    implementation 'cn.jiguang.sdk:jpush:3.3.4'  // 此处以JPush 3.3.4 版本为例。
+    implementation 'cn.jiguang.sdk:jcore:2.1.2'  // 此处以JCore 2.1.2 版本为例。
 }
 

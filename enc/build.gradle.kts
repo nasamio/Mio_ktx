@@ -15,6 +15,15 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            //设置支持的架构
+            abiFilters.add("armeabi")
+            abiFilters.add("armeabi-v7a")
+            abiFilters.add("x86_64")
+            abiFilters.add("x86")
+        }
+
     }
 
     buildTypes {
@@ -33,6 +42,10 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    sourceSets["main"]
+        .jniLibs
+        .srcDirs("libs")
+
 }
 
 dependencies {
@@ -41,6 +54,8 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.9.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation(files("libs\\gdal.aar"))
+    // 导入libs下的gdal.aar
 //    implementation(files("libs\\s57Library.jar"))
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
@@ -51,4 +66,10 @@ dependencies {
 
     // 权限
     implementation("com.yanzhenjie:permission:2.0.3")
+
+    implementation(project(mapOf("path" to ":s57")))
+
+    implementation ("com.squareup.okhttp3:okhttp:4.9.3")
+
+
 }

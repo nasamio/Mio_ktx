@@ -11,6 +11,9 @@ pluginManagement {
         maven { url 'https://maven.aliyun.com/repository/jcenter' } //jcenter
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
         maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
+        maven {
+            url 'https://esri.bintray.com/arcgis'
+        }
     }
 }
 dependencyResolutionManagement {
@@ -39,8 +42,8 @@ include ':music' // 听歌模块
 //include ':weather' // 天气模块
 include ':script' // 脚本模块
 include ':account' // 记账模块
-include ':yolo' // nihui 使用yolo的模块
-include ':yolov5' // 重写之后的yolov5模块
+//include ':yolo' // nihui 使用yolo的模块
+//include ':yolov5' // 重写之后的yolov5模块
 include ':compose' // 学习compose的模块
 include ':filemanager'
 include ':launcher'
@@ -49,3 +52,5 @@ include ':game'
 include ':launcher_ktx'
 include ':enc'
 //include(':net.sf.capcode.library.S57Library')
+include ':jni'
+include ':s57'
