@@ -1,4 +1,0 @@
-<resources>
-    <string name="app_name">weather</string>
-    <string name="bad_network_view_tip">无网络</string>
-</resources>
