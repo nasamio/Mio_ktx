@@ -1,4 +1,4 @@
-## 这是用于简化开发的仓库（kotlin编写）
+## ## 这是用于简化开发的仓库（kotlin编写）
 
 仅限个人及小伙伴使用，下面是各个模块的使用方式。
 
@@ -8,11 +8,11 @@
 
 ```
 allprojects {
-		repositories {
-			...
-			maven { url 'https://jitpack.io' }
-		}
-	}
+        repositories {
+            ...
+            maven { url 'https://jitpack.io' }
+        }
+    }
 ```
 
 高版本的as可能在settings.gradle中。
@@ -165,4 +165,24 @@ class TestView(context: Context?, attrs: AttributeSet?) :
                 animatorOut = R.anim.fragment_exit_to_left,
             )
 ```
-### 下面是一些测试的demo，分属在不同的模块下
+
+### 下面是一些功能项
+
+#### 图片加载:
+
+```
+   val url = "https://t7.baidu.com/it/u=3601447414,1764260638&fm=193&f=GIF"
+        mDataBinding.ivTest.apply {
+            // 加载图片
+            load(url)
+            load(R.drawable.ic_app)
+            // 圆角
+            loadRound(url, 20f)
+            // 圆形
+            loadCircle(url)
+            // 模糊
+            loadBlur(url, 20)
+        }
+```
+
+图片加载内部是使用glide实现的 

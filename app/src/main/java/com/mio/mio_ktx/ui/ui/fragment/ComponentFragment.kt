@@ -22,7 +22,17 @@ class ComponentFragment : BaseFragment<FragmentComponentBinding>(R.layout.fragme
 
     private fun testBgDrawable() {
         val url = "https://t7.baidu.com/it/u=3601447414,1764260638&fm=193&f=GIF"
-        mDataBinding.ivTest.load(url)
+        mDataBinding.ivTest.apply {
+            // 加载图片
+            load(url)
+            load(R.drawable.ic_app)
+            // 圆角
+            loadRound(url, 20f)
+            // 圆形
+            loadCircle(url)
+            // 模糊
+            loadBlur(url, 20)
+        }
 
 
 //        mDataBinding.tv1.apply {
