@@ -46,6 +46,10 @@ dependencies {
 
     implementation "com.squareup.retrofit2:converter-gson:2.9.0"
     implementation "org.jetbrains.kotlin:kotlin-reflect:1.8.20-RC2"
+    // glide
+    implementation "com.github.bumptech.glide:glide:4.16.0"
+    // jp.wasabeef:glide-transformations
+    implementation "jp.wasabeef:glide-transformations:4.3.0"
 
 //    implementation "io.ktor:ktor-server-core-jvm"
 //    implementation "io.ktor:ktor-server-netty-jvm"
