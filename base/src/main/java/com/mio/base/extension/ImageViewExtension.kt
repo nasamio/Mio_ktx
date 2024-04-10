@@ -1,25 +1,18 @@
 package com.mio.base.extension
 
-import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapShader
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.RectF
 import android.graphics.Shader
-import android.graphics.drawable.Drawable
-import android.os.Build
-import android.transition.Transition
 import android.widget.ImageView
-import androidx.annotation.RequiresApi
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation
 import com.bumptech.glide.load.resource.bitmap.TransformationUtils
-import com.bumptech.glide.request.target.CustomTarget
 import com.mio.base.utils.ImageLoader
 import jp.wasabeef.glide.transformations.BlurTransformation
-import java.io.File
 import java.security.MessageDigest
 
 /**
