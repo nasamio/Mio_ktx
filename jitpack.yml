@@ -16,4 +16,4 @@ jdk:
 #  - 8.0
 
 install:
-  - ./gradlew clean -Pgroup=com.github.nasamio -xtest -xlint publishToMavenLocal
+  - ./gradlew init
