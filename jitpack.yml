@@ -16,4 +16,4 @@ jdk:
 #  - 8.0
 
 install:
-  - ./gradlew init
+  - gradlew init
