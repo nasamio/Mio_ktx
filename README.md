@@ -3,7 +3,7 @@
 仅限个人及小伙伴使用，下面是各个模块的使用方式。
 
 ### 使用：
-
+[![](https://jitpack.io/v/nasamio/Mio_ktx.svg)](https://jitpack.io/#nasamio/Mio_ktx)
 项目根目录的build.gradle中：
 
 ```
