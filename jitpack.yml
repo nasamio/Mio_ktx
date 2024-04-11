@@ -2,11 +2,11 @@
 before_install:
   - sdk install java 17.0.10-open
   - sdk use java 17.0.10-open
-#  # 安装gradle8.0
-#  - sdk install gradle 8.0
-#  - sdk use gradle 8.0
-#  # 回到上级目录
-#  - cd ..
+  # 安装gradle8.0
+  - sdk install gradle 8.0
+  - sdk use gradle 8.0
+  # 回到上级目录
+  - cd ..
 
 jdk:
   - openjdk17
@@ -15,5 +15,5 @@ jdk:
 #gradle:
 #  - 8.0
 
-#install:
-#  - ./gradlew assembleDebug
+install:
+  - ./gradlew clean -Pgroup=com.github.nasamio -xtest -xlint publishToMavenLocal
