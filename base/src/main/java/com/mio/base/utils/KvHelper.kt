@@ -92,6 +92,9 @@ object KvHelper {
         saveString(key, json)
     }
 
+    /**
+     * 1111
+     */
     fun <T : Any> getObject(key: String?, clazz: Class<T>): T? {
         val json = getString(key, null)
         return json?.toBean(clazz)
