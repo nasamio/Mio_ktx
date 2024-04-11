@@ -7,5 +7,5 @@ jdk:
   - openjdk17
 
 # 使用 gradle 8.0
-gradle:
-  - 8.0
+#gradle:
+#  - 8.0
