@@ -13,9 +13,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.Random
 
-/**
- *
- */
 class UniverseActivity : BaseActivity<ActivityUniverseBinding>(R.layout.activity_universe) {
     override fun initView() {
         mDataBinding.fab.setClickListener {

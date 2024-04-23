@@ -46,10 +46,6 @@ dependencies {
 
     implementation "com.squareup.retrofit2:converter-gson:2.9.0"
     implementation "org.jetbrains.kotlin:kotlin-reflect:1.8.20-RC2"
-    // glide
-    implementation "com.github.bumptech.glide:glide:4.16.0"
-    // jp.wasabeef:glide-transformations
-    implementation "jp.wasabeef:glide-transformations:4.3.0"
 
 //    implementation "io.ktor:ktor-server-core-jvm"
 //    implementation "io.ktor:ktor-server-netty-jvm"
@@ -64,18 +60,3 @@ dependencies {
 
 
 }
-
-publishing {
-    publications {
-        release(MavenPublication) {
-            groupId = 'com.github.nasamio' // 这个是依赖库的组 id
-            artifactId = 'Mio_ktx'       // 依赖库的名称（jitpack 都不会使用到）
-            version = "1.0.0" //
-
-            afterEvaluate {
-                from components.release
-            }
-        }
-    }
-}
-

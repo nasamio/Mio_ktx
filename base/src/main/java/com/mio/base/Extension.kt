@@ -108,12 +108,11 @@ fun AppCompatActivity.toFragment(
     fragment: Fragment,
     animatorEnter: Int = 0, // 可以尝试使用：fragment_enter_from_left.xml
     animatorOut: Int = 0,
-    tag: String? = null
 ) {
     supportFragmentManager
         .beginTransaction()
         .setCustomAnimations(animatorEnter, animatorOut) // 必须在replace之前才生效
-        .replace(containerId, fragment, tag)
+        .replace(containerId, fragment)
         .show(fragment)
         .addToBackStack(null)
         .commit()

@@ -1,11 +1,6 @@
 *.iml
 .gradle
 .idea
-gradlew
-gradlew.bat
-
-
-/build
 /local.properties
 /.idea/caches
 /.idea/libraries
@@ -14,6 +9,7 @@ gradlew.bat
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
 .DS_Store
+/build
 /captures
 .externalNativeBuild
 .cxx

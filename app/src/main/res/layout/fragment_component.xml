@@ -17,31 +17,26 @@
             android:orientation="vertical"
             tools:ignore="HardcodedText">
 
-            <ImageView
-                android:id="@+id/iv_test"
-                android:layout_width="350dp"
-                android:layout_height="200dp" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="background drawable 动态" />
 
-            <!--            <androidx.appcompat.widget.AppCompatTextView-->
-            <!--                android:id="@+id/tv_1"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_marginTop="10dp"-->
-            <!--                android:text="background drawable 动态" />-->
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_tv"
+                android:text="background drawable 静态" />
 
-            <!--            <androidx.appcompat.widget.AppCompatTextView-->
-            <!--                android:id="@+id/tv_2"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_marginTop="10dp"-->
-            <!--                android:background="@drawable/bg_tv"-->
-            <!--                android:text="background drawable 静态" />-->
-
-            <!--            <com.mio.base.view.MioButton-->
-            <!--                android:id="@+id/btn_1"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:text="测试按钮" />-->
+            <com.mio.base.view.MioButton
+                android:id="@+id/btn_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="测试按钮" />
         </LinearLayout>
 
     </ScrollView>

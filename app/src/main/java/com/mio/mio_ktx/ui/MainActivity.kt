@@ -20,7 +20,6 @@ import com.mio.base.BaseActivity
 import com.mio.base.BaseFragment
 import com.mio.base.Tag.TAG
 import com.mio.base.replaceFragment
-import com.mio.base.utils.ImageLoader
 import com.mio.base.view.BottomTab
 import com.mio.mio_ktx.R
 import com.mio.mio_ktx.databinding.ActivityMainBinding
@@ -50,8 +49,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         showInitTag = true
 
         lifecycleScope.launch {
-            ImageLoader.config(R.drawable.image_dog, R.drawable.ic_meizi)
-
 //            showLoading()
 //            delay(1_200)
 //            replaceFragment(R.id.container, AFragment())
@@ -99,12 +96,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
      * 初始化数据
      */
     override fun initData() {
-        lifecycleScope.launch {
-            showLoading()
-            delay(2000)
-            showContent()
-            showError()
-        }
     }
 
     override fun initObserver() {

@@ -1,18 +1,18 @@
-## ## 这是用于简化开发的仓库（kotlin编写）
+## 这是用于简化开发的仓库（kotlin编写）
 
 仅限个人及小伙伴使用，下面是各个模块的使用方式。
 
 ### 使用：
-[![](https://jitpack.io/v/nasamio/Mio_ktx.svg)](https://jitpack.io/#nasamio/Mio_ktx)
+
 项目根目录的build.gradle中：
 
 ```
 allprojects {
-        repositories {
-            ...
-            maven { url 'https://jitpack.io' }
-        }
-    }
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
 ```
 
 高版本的as可能在settings.gradle中。
@@ -73,11 +73,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     override fun initData() {
         // 在这里进行界面数据的获取
-        
-        // 可以设置显示加载状态 有数据之后再显示界面 默认是直接显示页面的
-        showLoading()
-        showContent()
-        showError()
     }
 
     override fun initObserver() {
@@ -124,11 +119,6 @@ class AFragment : BaseFragment<FragmentABinding>(R.layout.fragment_a) {
     }
 
     override fun initData() {
-       // 可以设置显示加载状态 有数据之后再显示界面 默认是直接显示页面的
-       // 对应方法和activity中一致
-        showLoading()
-        showContent()
-        showError()
     }
 }
 
@@ -165,24 +155,4 @@ class TestView(context: Context?, attrs: AttributeSet?) :
                 animatorOut = R.anim.fragment_exit_to_left,
             )
 ```
-
-### 下面是一些功能项
-
-#### 图片加载:
-
-```
-   val url = "https://t7.baidu.com/it/u=3601447414,1764260638&fm=193&f=GIF"
-        mDataBinding.ivTest.apply {
-            // 加载图片
-            load(url)
-            load(R.drawable.ic_app)
-            // 圆角
-            loadRound(url, 20f)
-            // 圆形
-            loadCircle(url)
-            // 模糊
-            loadBlur(url, 20)
-        }
-```
-
-图片加载内部是使用glide实现的 
+### 下面是一些测试的demo，分属在不同的模块下

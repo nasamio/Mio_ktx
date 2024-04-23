@@ -38,19 +38,19 @@ dependencyResolutionManagement {
 rootProject.name = "Mio_ktx"
 include ':app'  // 测试其他模块的应用模块
 include ':base' // 用于基类的模块
-//include ':music' // 听歌模块
+include ':music' // 听歌模块
 //include ':weather' // 天气模块
-//include ':script' // 脚本模块
-//include ':account' // 记账模块
+include ':script' // 脚本模块
+include ':account' // 记账模块
 //include ':yolo' // nihui 使用yolo的模块
 //include ':yolov5' // 重写之后的yolov5模块
-//include ':compose' // 学习compose的模块
-//include ':filemanager'
-//include ':launcher'
-//include ':pathplanning'
-//include ':game'
-//include ':launcher_ktx'
-//include ':enc'
+include ':compose' // 学习compose的模块
+include ':filemanager'
+include ':launcher'
+include ':pathplanning'
+include ':game'
+include ':launcher_ktx'
+include ':enc'
 //include(':net.sf.capcode.library.S57Library')
-//include ':jni'
-//include ':s57'
+include ':jni'
+include ':s57'
