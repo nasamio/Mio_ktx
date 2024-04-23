@@ -3,17 +3,6 @@ plugins {
     id 'com.android.application' version '8.1.0-rc01' apply false
     id 'org.jetbrains.kotlin.android' version '1.8.0' apply false
     id 'com.android.library' version '8.1.0-rc01' apply false
+    id 'maven-publish'
 }
 
-afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
-                from components.release         // 表示发布 release（jitpack 都不会使用到）
-                groupId = 'com.github.nasamio' // 这个是依赖库的组 id
-                artifactId = 'Mio_ktx'       // 依赖库的名称（jitpack 都不会使用到）
-                version = "1.0.0" //
-            }
-        }
-    }
-}
