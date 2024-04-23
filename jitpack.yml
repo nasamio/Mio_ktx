@@ -17,5 +17,5 @@ jdk:
 install:
 #  - ./gradlew init
   - ls
-#  - cd ..
-#  - ls
+  - cd ..
+  - ls
