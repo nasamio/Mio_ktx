@@ -1,4 +1,4 @@
-# 添加 jitpack 在线编译的时候的环境 默认jitpack编译使用的是java8
+# 添加 jitpack 在线编译的时候的环境 默认jitpack编译使用的是java8 修改注释
 before_install:
   - sdk install java 17.0.10-open
   - sdk use java 17.0.10-open
