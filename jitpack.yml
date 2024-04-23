@@ -17,5 +17,7 @@ jdk:
 install:
 #  - ./gradlew init
   - ls
-  - cd ..
-  - ls
+
+script:
+  - echo "start build..."
+  - ./gradlew build
