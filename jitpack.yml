@@ -6,7 +6,7 @@ before_install:
   - sdk install gradle 8.0
   - sdk use gradle 8.0
   # 回到上级目录
-  - cd ..
+  - ls
 
 jdk:
   - openjdk17
@@ -16,4 +16,4 @@ jdk:
 #  - 8.0
 
 install:
-  - gradlew init
+  - ./gradlew init
