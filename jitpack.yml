@@ -1,11 +1,11 @@
 # 添加 jitpack 在线编译的时候的环境 默认jitpack编译使用的是java8 修改注释
-before_install:
-  - sdk install java 17.0.10-open
-  - sdk use java 17.0.10-open
-  # 安装gradle8.0
-  - sdk install gradle 8.0
-  - sdk use gradle 8.0
-  # 回到上级目录
+#before_install:
+#  - sdk install java 17.0.10-open
+#  - sdk use java 17.0.10-open
+#  # 安装gradle8.0
+#  - sdk install gradle 8.0
+#  - sdk use gradle 8.0
+#  # 回到上级目录
 
 jdk:
   - openjdk17
@@ -14,10 +14,10 @@ jdk:
 #gradle:
 #  - 8.0
 
-install:
-#  - ./gradlew init
-  - ls
+#install:
+##  - ./gradlew init
+#  - ls
 
-script:
-  - echo "start build..."
-  - ./gradlew build
+#script:
+#  - echo "start build..."
+#  - ./gradlew build
