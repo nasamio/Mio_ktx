@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id("maven-publish")
 }
 
 android {
@@ -59,4 +60,22 @@ dependencies {
 //    implementation "io.ktor:ktor-server-features:2.3.6"
 
 
+}
+
+
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a publication called "release"
+            create<MavenPublication>("release") {
+                // Applies the component for the release build variant
+                from(components["release"])
+
+                // Sets the coordinates for your library
+                groupId = "com.github.nasamio" // <-- 你的 GitHub 用户名
+                artifactId = "YourLibraryName"      // <-- 你的库的名称
+                version = "0.1.26"                  // <-- 你要发布的版本号
+            }
+        }
+    }
 }
