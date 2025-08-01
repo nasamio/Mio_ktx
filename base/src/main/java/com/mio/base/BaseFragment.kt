@@ -164,7 +164,7 @@ abstract class BaseFragment<T : ViewDataBinding>(
     /**
      * 处理按键事件
      */
-    fun handleKey(keyCode: Int): Boolean {
+   open fun handleKey(keyCode: Int): Boolean {
         return false
     }
 }
