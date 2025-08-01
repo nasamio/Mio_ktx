@@ -9,13 +9,5 @@
         android:id="@+id/contact"
         android:icon="@drawable/contact"
         android:title="@string/contact" />
-    <item
-        android:id="@+id/recent"
-        android:icon="@drawable/recent_call"
-        android:title="@string/calling_record" />
 
-    <item
-        android:id="@+id/contact"
-        android:icon="@drawable/contact"
-        android:title="@string/contact" />
 </menu>

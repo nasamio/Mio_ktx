@@ -67,10 +67,10 @@ afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
-                from components.release // 注意这里没有方括号和引号
-                groupId = 'com.github.nasamio'      // 你的 GitHub 用户名
-                artifactId = 'Mio_ktx'       // 你的库名
-                version = '0.1.29'                   // 你的版本号
+                from components.release
+                groupId = 'com.github.nasamio'
+                artifactId = 'Mio_ktx'
+                version = '0.1.30'
             }
         }
     }
