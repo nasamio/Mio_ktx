@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.mio.base.databinding.LayoutRootBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -174,5 +175,9 @@ abstract class BaseFragment<T : ViewDataBinding>(
 
     open fun onKeyUp(keyCode: Int): Boolean {
         return handleKey(keyCode)
+    }
+
+    open fun goBack() {
+        findNavController().navigateUp()
     }
 }
