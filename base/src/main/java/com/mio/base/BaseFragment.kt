@@ -6,11 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import androidx.core.view.doOnPreDraw
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import com.mio.base.databinding.LayoutRootBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -51,6 +51,15 @@ abstract class BaseFragment<T : ViewDataBinding>(
         initData()
 //        if (showInitTag) Log.d(Tag.TAG, "init data...")
         return mRootBinding.root
+    }
+
+    // 解决fragment跳转可能首次无动画的问题
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        postponeEnterTransition()
+        view.doOnPreDraw {
+            startPostponedEnterTransition()
+        }
     }
 
     /**
@@ -177,7 +186,4 @@ abstract class BaseFragment<T : ViewDataBinding>(
         return handleKey(keyCode)
     }
 
-    open fun goBack() {
-        findNavController().navigateUp()
-    }
 }
