@@ -178,12 +178,11 @@ abstract class BaseFragment<T : ViewDataBinding>(
         return false
     }
 
-    open fun onKeyDown(keyCode: Int): Boolean {
-        return handleKey(keyCode)
-    }
-
-    open fun onKeyUp(keyCode: Int): Boolean {
-        return handleKey(keyCode)
+    /**
+     * 处理长按键事件
+     */
+    open fun handleLongKey(keyCode: Int): Boolean {
+        return false
     }
 
 }
